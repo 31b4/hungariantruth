@@ -18,6 +18,54 @@
         "url": "mandiner.hu",
         "type": "rss",
         "rss_url": "https://mandiner.hu/rss"
+      },
+      {
+        "name": "Ripost",
+        "url": "ripost.hu",
+        "type": "rss",
+        "rss_url": "https://ripost.hu/feed/"
+      },
+      {
+        "name": "Demokrata",
+        "url": "demokrata.hu",
+        "type": "rss",
+        "rss_url": "https://demokrata.hu/feed/"
+      },
+      {
+        "name": "Vadhajtások",
+        "url": "vadhajtasok.hu",
+        "type": "rss",
+        "rss_url": "https://vadhajtasok.hu/feed/"
+      },
+      {
+        "name": "Kuruc.info",
+        "url": "kuruc.info",
+        "type": "rss",
+        "rss_url": "https://kuruc.info/rss"
+      },
+      {
+        "name": "Magyar Hírlap",
+        "url": "magyarhirlap.hu",
+        "type": "custom",
+        "scraper": "magyar_hirlap"
+      },
+      {
+        "name": "888",
+        "url": "888.hu",
+        "type": "custom",
+        "scraper": "888"
+      },
+      {
+        "name": "PestiSrácok",
+        "url": "pestisracok.hu",
+        "type": "custom",
+        "scraper": "pestisracok"
+      },
+      {
+        "name": "Hirado (MTVA)",
+        "url": "hirado.hu",
+        "type": "custom",
+        "scraper": "hirado"
       }
     ],
     "left_wing": [
@@ -44,6 +92,48 @@
         "url": "index.hu",
         "type": "rss",
         "rss_url": "https://index.hu/24ora/rss/"
+      },
+      {
+        "name": "24.hu",
+        "url": "24.hu",
+        "type": "rss",
+        "rss_url": "https://24.hu/feed/"
+      },
+      {
+        "name": "Népszava",
+        "url": "nepszava.hu",
+        "type": "rss",
+        "rss_url": "https://nepszava.hu/feed/"
+      },
+      {
+        "name": "Magyar Hang",
+        "url": "magyarhang.org",
+        "type": "rss",
+        "rss_url": "https://magyarhang.org/feed/"
+      },
+      {
+        "name": "Mérce",
+        "url": "merce.hu",
+        "type": "rss",
+        "rss_url": "https://merce.hu/feed/"
+      },
+      {
+        "name": "ATV",
+        "url": "atv.hu",
+        "type": "rss",
+        "rss_url": "https://atv.hu/feed/"
+      },
+      {
+        "name": "RTL",
+        "url": "rtl.hu",
+        "type": "custom",
+        "scraper": "rtl"
+      },
+      {
+        "name": "Partizán",
+        "url": "partizan.hu",
+        "type": "custom",
+        "scraper": "partizan"
       }
     ],
     "independent": [
@@ -60,10 +150,34 @@
         "rss_url": "https://atlatszo.hu/feed/"
       },
       {
-        "name": "G7",
-        "url": "g7.hu",
+        "name": "Világgazdaság",
+        "url": "vg.hu",
         "type": "rss",
-        "rss_url": "https://g7.hu/feed/"
+        "rss_url": "https://vg.hu/feed/"
+      },
+      {
+        "name": "Forbes",
+        "url": "forbes.hu",
+        "type": "rss",
+        "rss_url": "https://forbes.hu/feed/"
+      },
+      {
+        "name": "Blikk",
+        "url": "blikk.hu",
+        "type": "rss",
+        "rss_url": "https://blikk.hu/feed/"
+      },
+      {
+        "name": "Story",
+        "url": "story.hu",
+        "type": "rss",
+        "rss_url": "https://story.hu/feed/"
+      },
+      {
+        "name": "Direkt36",
+        "url": "direkt36.hu",
+        "type": "custom",
+        "scraper": "direkt36"
       }
     ]
   },
@@ -73,4 +187,3 @@
     "timeout_seconds": 30
   }
 }
-

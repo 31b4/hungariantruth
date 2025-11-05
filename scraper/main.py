@@ -6,9 +6,16 @@ import logging
 from datetime import datetime
 from pathlib import Path
 import sys
+import importlib
 
 from rss_reader import RSSReader
 from sites.origo import OrigoScraper
+from sites.magyar_hirlap import MagyarHirlapScraper
+from sites.pestisracok import PestiSracokScraper
+from sites.hirado import HiradoScraper
+from sites.rtl import RTLScraper
+from sites.partizan import PartizanScraper
+from sites.direkt36 import Direkt36Scraper
 
 logging.basicConfig(
     level=logging.INFO,
@@ -61,10 +68,28 @@ class NewsAggregator:
                     elif source_type == 'custom':
                         # Use custom scraper
                         scraper_name = source_config['scraper']
-                        if scraper_name == 'origo':
-                            scraper = OrigoScraper(
-                                max_age_hours=self.config['scraping_settings']['max_article_age_hours']
-                            )
+                        max_age_hours = self.config['scraping_settings']['max_article_age_hours']
+                        
+                        # Dynamic scraper loading
+                        scraper_map = {
+                            'origo': OrigoScraper,
+                            'magyar_hirlap': MagyarHirlapScraper,
+                            'pestisracok': PestiSracokScraper,
+                            'hirado': HiradoScraper,
+                            'rtl': RTLScraper,
+                            'partizan': PartizanScraper,
+                            'direkt36': Direkt36Scraper,
+                        }
+                        
+                        # Handle modules that start with numbers
+                        if scraper_name == '888':
+                            module = importlib.import_module('sites.888', package=None)
+                            ScraperClass = getattr(module, 'Scraper888')
+                            scraper = ScraperClass(max_age_hours=max_age_hours)
+                            articles = scraper.fetch_articles(max_articles)
+                            self.articles.extend(articles)
+                        elif scraper_name in scraper_map:
+                            scraper = scraper_map[scraper_name](max_age_hours=max_age_hours)
                             articles = scraper.fetch_articles(max_articles)
                             self.articles.extend(articles)
                         else:

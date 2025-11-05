@@ -1,0 +1,94 @@
+"""
+Custom scraper for Direkt36
+"""
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class Direkt36Scraper:
+    def __init__(self, max_age_hours=24):
+        self.base_url = "https://direkt36.hu"
+        self.max_age_hours = max_age_hours
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+    
+    def fetch_articles(self, max_articles=10):
+        """Fetch articles from Direkt36 homepage"""
+        articles = []
+        
+        try:
+            logger.info(f"Scraping Direkt36")
+            response = requests.get(self.base_url, headers=self.headers, timeout=30)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Try finding articles
+            article_elements = soup.find_all(['article', 'div'], class_=lambda x: x and ('article' in str(x).lower() or 'post' in str(x).lower() or 'story' in str(x).lower()), limit=max_articles * 2)
+            
+            if not article_elements:
+                # Try finding links
+                article_elements = soup.find_all('a', href=lambda x: x and ('/hir/' in x or '/cikk/' in x or '/tartalom/' in x), limit=max_articles * 2)
+            
+            seen_links = set()
+            
+            for element in article_elements:
+                try:
+                    # Find title
+                    title_elem = element.find(['h1', 'h2', 'h3', 'h4', 'a', 'span'])
+                    if not title_elem:
+                        continue
+                    
+                    title = title_elem.get_text(strip=True)
+                    if not title or len(title) < 10:
+                        continue
+                    
+                    # Find link
+                    link_elem = element.find('a', href=True) if element.name != 'a' else element
+                    if not link_elem:
+                        continue
+                    
+                    link = link_elem['href']
+                    if link.startswith('/'):
+                        link = self.base_url + link
+                    elif not link.startswith('http'):
+                        continue
+                    
+                    if link in seen_links:
+                        continue
+                    seen_links.add(link)
+                    
+                    # Extract summary
+                    summary_elem = element.find(['p', 'div'], class_=lambda x: x and ('summary' in str(x).lower() or 'excerpt' in str(x).lower() or 'lead' in str(x).lower()))
+                    summary = summary_elem.get_text(strip=True)[:500] if summary_elem else ""
+                    
+                    article = {
+                        'source': 'Direkt36',
+                        'title': title,
+                        'link': link,
+                        'published': datetime.now().isoformat(),
+                        'summary': summary
+                    }
+                    
+                    if article['title'] and article['link']:
+                        articles.append(article)
+                        
+                    if len(articles) >= max_articles:
+                        break
+                        
+                except Exception as e:
+                    logger.debug(f"Error parsing article element: {e}")
+                    continue
+            
+            logger.info(f"Scraped {len(articles)} articles from Direkt36")
+            
+        except Exception as e:
+            logger.error(f"Error scraping Direkt36: {e}")
+        
+        return articles
+

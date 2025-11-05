@@ -23,7 +23,7 @@ class NewsSynthesizer:
             raise ValueError("Gemini API key not provided. Set GEMINI_API_KEY environment variable.")
         
         genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-pro')
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
     
     def create_synthesis_prompt(self, categorized_articles):
         """
@@ -43,11 +43,13 @@ You will receive news articles from different political perspectives:
 - Independent sources
 
 Your task:
-1. Identify the top 3-5 most important news stories of the day
+1. Identify the top 2-3 most important news stories of the day
 2. For each story, analyze how different sources cover it
 3. Create a neutral, fact-based synthesis that presents the truth without political bias
 4. Provide both Hungarian and English versions
 5. Cite which sources reported what
+
+IMPORTANT: You MUST return ONLY valid, complete JSON. Do not truncate. Complete all fields.
 
 Guidelines:
 - Be strictly neutral and objective
@@ -133,12 +135,16 @@ Here are today's articles:
                         'temperature': 0.3,  # Lower temperature for more factual output
                         'top_p': 0.8,
                         'top_k': 40,
-                        'max_output_tokens': 4096,
+                        'max_output_tokens': 8192,
                     }
                 )
                 
                 # Extract JSON from response
-                response_text = response.text
+                try:
+                    response_text = response.text
+                except ValueError:
+                    # Handle complex responses
+                    response_text = response.candidates[0].content.parts[0].text
                 
                 # Try to parse JSON (handle markdown code blocks)
                 if '```json' in response_text:
@@ -158,7 +164,7 @@ Here are today's articles:
                 synthesis['metadata'] = {
                     'sources_scraped': sum(len(articles) for articles in categorized_articles.values()),
                     'generation_time': datetime.now().isoformat(),
-                    'ai_model': 'gemini-pro'
+                    'ai_model': 'gemini-2.5-flash'
                 }
                 
                 logger.info(f"Successfully synthesized {len(synthesis.get('stories', []))} stories")
@@ -167,10 +173,17 @@ Here are today's articles:
                 
             except json.JSONDecodeError as e:
                 logger.error(f"Failed to parse JSON from Gemini response: {e}")
-                logger.debug(f"Raw response: {response_text[:500]}")
+                logger.error(f"Response text length: {len(response_text)}")
+                logger.error(f"First 1000 chars: {response_text[:1000]}")
+                logger.error(f"Last 500 chars: {response_text[-500:]}")
                 if attempt < retry_count - 1:
+                    logger.info("Retrying with simplified request...")
                     continue
                 else:
+                    # Save problematic response for debugging
+                    with open('gemini_error_response.txt', 'w', encoding='utf-8') as f:
+                        f.write(response_text)
+                    logger.error("Saved problematic response to gemini_error_response.txt")
                     raise
                     
             except Exception as e:
