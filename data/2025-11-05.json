@@ -2,33 +2,10 @@
   "date": "2025-11-05",
   "stories": [
     {
-      "title_hu": "Adatszivárgási incidens a Tisza Párt applikációjánál",
-      "title_en": "Data Leak Incident at Tisza Party's Application",
-      "summary_hu": "A Tisza Párt „Tisza Világ” elnevezésű mobilalkalmazásával kapcsolatban adatszivárgási incidens történt. A kormánypárti médiaorgánumok, mint az Origo, Magyar Nemzet, Mandiner, Vadhajtások, PestiSrácok és Kuruc.info, kiemelten foglalkoznak az üggyel, állítva, hogy belső levelezések és hangfelvételek bizonyítják, az applikációt megfelelő tesztelés nélkül indították el. Ezen források szerint magyar állampolgárok, köztük aktív bírók személyes adatai kerülhettek veszélybe, és egyesek szerint akár egy „háborúban álló ország” kezébe is juthattak. A kormánypárti sajtó az esetet „botrányként” és „kudarcként” értékeli, és a Tisza Párt támogatottságának csökkenésével hozza összefüggésbe.\n\nA baloldali és független források, mint a Telex és a HVG, szintén beszámolnak az adatszivárgásról. A Telex szerint a Tisza Párt elismerte az incidenst, és közölte, hogy minden eszközzel igyekeznek elhárítani a külső támadásokat, valamint folyamatosan fejlesztik a rendszer biztonságát. Török Gábor politológus (HVG) szerint az adatügytől nem várható komoly fordulat a pártok versenyében, mivel a választók elsöprő többsége már döntött. A Vadhajtások egy Partizán elemző kritikáját is megemlíti a jobboldali média tudósításával kapcsolatban.",
-      "summary_en": "A data leak incident has occurred concerning the Tisza Party's mobile application, named 'Tisza Világ'. Government-aligned media outlets, such as Origo, Magyar Nemzet, Mandiner, Vadhajtások, PestiSrácok, and Kuruc.info, have extensively covered the issue, claiming that internal correspondence and audio recordings prove the application was launched without adequate testing. According to these sources, personal data of Hungarian citizens, including active judges, may have been compromised, with some suggesting it could have fallen into the hands of a 'warring country'. The pro-government press characterizes the event as a 'scandal' and 'failure,' linking it to a decline in the Tisza Party's support.\n\nLeft-wing and independent sources, such as Telex and HVG, also report on the data leak. Telex states that the Tisza Party acknowledged the incident, announcing that they are taking all measures to ward off external attacks and continuously improving the system's security. Political analyst Gábor Török (HVG) suggests that the data incident is unlikely to cause a significant shift in party competition, as the vast majority of voters have already made their decision. Vadhajtások also mentions a Partizán analyst's criticism regarding the right-wing media's reporting on the matter.",
-      "sources_analyzed": [
-        "Origo",
-        "Magyar Nemzet",
-        "Mandiner",
-        "Vadhajtások",
-        "PestiSrácok",
-        "Kuruc.info",
-        "Telex",
-        "HVG"
-      ],
-      "perspective_comparison": "A kormánypárti források az adatszivárgást súlyos botrányként, a Tisza Párt bénázásaként tálalják, hangsúlyozva a személyes adatok biztonságának veszélyeztetését és politikai következményeit. Ezzel szemben a baloldali és független források tényként kezelik az incidenst, de a Tisza Párt reakciójára és a politológusi elemzésekre is kitérnek, amelyek szerint az ügy valószínűleg nem okoz jelentős politikai átrendeződést. A kormánypárti források a Tisza Párt népszerűségének csökkenésével is összekapcsolják az esetet, míg a független elemzők ezt vitatják.",
-      "key_facts": [
-        "Adatszivárgási incidens történt a Tisza Párt „Tisza Világ” applikációjával kapcsolatban.",
-        "Kormánypárti források szerint belső kommunikációk bizonyítják a tesztelés nélküli indítást és a személyes adatok (köztük bírók adatai) kiszivárgását.",
-        "A Tisza Párt elismerte az incidenst és a külső támadások elhárításán, valamint a rendszer biztonságának fejlesztésén dolgozik.",
-        "Politológusok szerint az incidens valószínűleg nem okoz jelentős változást a pártok támogatottságában."
-      ]
-    },
-    {
-      "title_hu": "Orbán Viktor amerikai útja és találkozója Donald Trumppal",
-      "title_en": "Viktor Orbán's Trip to the US and Meeting with Donald Trump",
-      "summary_hu": "Orbán Viktor miniszterelnök az Egyesült Államokba utazik, hogy találkozzon Donald Trump korábbi elnökkel. Szijjártó Péter külgazdasági és külügyminiszter tájékoztatása szerint a megbeszélések fő témái az ukrajnai béketeremtés lehetőségei, valamint a kétoldalú gazdasági és energetikai együttműködés lesznek. A kormánypárti média, mint az Origo, Magyar Nemzet, Mandiner, Ripost, Demokrata, PestiSrácok és Világgazdaság, kiemeli a találkozó jelentőségét, hangsúlyozva Magyarország békepárti álláspontját és Donald Trump békeerőfeszítéseinek támogatását.\n\nA delegációban többek között Lázár János és Szalay-Bobrovniczky Kristóf miniszterek, valamint számos vállalat vezetője is helyet kapott. Több forrás, köztük az Index, Népszava, ATV és Világgazdaság, megemlíti, hogy a magyar delegáció Wizz Air fapados járattal utazik Washingtonba, amit a Világgazdaság „meglepetésként” vagy „rendhagyó fogadtatásként” ír le Trump számára. A találkozóra pénteken kerül sor.",
-      "summary_en": "Prime Minister Viktor Orbán is traveling to the United States to meet with former President Donald Trump. According to Foreign Minister Péter Szijjártó, the main topics of discussion will be the possibilities for peace-making in Ukraine and the development of bilateral economic and energy cooperation. Government-aligned media, such as Origo, Magyar Nemzet, Mandiner, Ripost, Demokrata, PestiSrácok, and Világgazdaság, emphasize the significance of the meeting, highlighting Hungary's pro-peace stance and support for Donald Trump's peace efforts.\n\nThe delegation includes ministers János Lázár and Kristóf Szalay-Bobrovniczky, as well as leaders of several companies. Multiple sources, including Index, Népszava, ATV, and Világgazdaság, mention that the Hungarian delegation will travel to Washington by Wizz Air, which Világgazdaság describes as a 'surprise' or 'unconventional reception' for Trump. The meeting is scheduled for Friday.",
+      "title_hu": "Orbán Viktor amerikai útja és a Tisza Párt adatvédelmi botránya",
+      "title_en": "Viktor Orbán's US Trip and the Tisza Party Data Privacy Scandal",
+      "summary_hu": "Orbán Viktor miniszterelnök az Egyesült Államokba utazik, hogy találkozzon Donald Trump volt elnökkel. A delegáció, amely több minisztert és cégvezetőt is magában foglal, egy bérelt Wizz Air géppel utazik. Szijjártó Péter külgazdasági és külügyminiszter tájékoztatása szerint a megbeszélések fő témái az ukrajnai béketeremtés lehetőségei, valamint a kétoldalú gazdasági és energetikai együttműködés lesznek. Orbán Viktor korábban kijelentette, hogy Magyarország nem támogatja Ukrajna európai uniós tagságát.\n\nEzzel párhuzamosan a Tisza Párt mobilalkalmazása körüli adatvédelmi botrány is a hírek középpontjában áll. Kormányközeli források kiszivárgott belső levelezésekre hivatkozva azt állítják, hogy az alkalmazást megfelelő tesztelés nélkül indították el, és személyes adatok, köztük aktív bírók adatai is kiszivároghattak. Kocsis Máté, a Fidesz frakcióvezetője élesen bírálta Magyar Pétert, azzal vádolva, hogy hazudott és veszélybe sodorta a támogatóit, utalva arra, hogy az adatok „háborúban álló ország kezébe” kerülhettek.\n\nA Tisza Párt elismerte az incidenst, és közölte, hogy „minden eszközzel és módszerrel” igyekeznek elhárítani a külső támadásokat, és folyamatosan fejlesztik a rendszer biztonságát, számos fejlesztőcsapat segítségével. Politikai elemzők szerint az adatvédelmi ügy valószínűleg nem okoz jelentős fordulatot a pártok támogatottságában, mivel a választók többsége már döntött.",
+      "summary_en": "Prime Minister Viktor Orbán is traveling to the United States to meet former President Donald Trump. The delegation, which includes several ministers and business leaders, is flying on a chartered Wizz Air plane. According to Minister of Foreign Affairs and Trade Péter Szijjártó, the main topics of discussion will be the possibilities for peace in Ukraine and bilateral economic and energy cooperation. Viktor Orbán previously stated that Hungary does not support Ukraine's European Union membership.\n\nConcurrently, a data privacy scandal surrounding the Tisza Party's mobile application is also in the news. Government-aligned sources, citing leaked internal correspondence, claim that the application was launched without proper testing and that personal data, including that of active judges, may have been compromised. Máté Kocsis, Fidesz parliamentary group leader, sharply criticized Péter Magyar, accusing him of lying and endangering his supporters, suggesting that data could have fallen into the hands of a \"country at war.\"\n\nThe Tisza Party acknowledged the incident, stating that they are using \"all tools and methods\" to ward off external attacks and are continuously developing the system's security with the help of numerous developer teams. Political analysts suggest that the data privacy issue is unlikely to cause a significant shift in party support, as most voters have already made their decisions.",
       "sources_analyzed": [
         "Origo",
         "Magyar Nemzet",
@@ -36,25 +13,34 @@
         "Ripost",
         "Demokrata",
         "PestiSrácok",
-        "Hirado (MTVA)",
+        "Hirado",
+        "Telex",
+        "HVG",
         "Index",
+        "24.hu",
         "Népszava",
+        "Magyar Hang",
         "ATV",
-        "Világgazdaság"
+        "Világgazdaság",
+        "Vadhajtások",
+        "Kuruc.info",
+        "Partizán"
       ],
-      "perspective_comparison": "Mind a kormánypárti, mind az ellenzéki/független források egyetértenek az utazás tényében és a megbeszélések fő témáiban (ukrajnai béke, gazdasági/energetikai együttműködés). A kormánypárti média azonban hangsúlyozottan Orbán Viktor békepárti szerepét és Trump békeerőfeszítéseinek támogatását emeli ki. Az utazás módja (Wizz Air) mindkét oldalon említésre kerül, de a kormánypárti források ezt inkább egyfajta 'meglepetésként' vagy 'rendhagyó' elemként mutatják be, míg az ellenzéki források egyszerűen tényként közlik.",
+      "perspective_comparison": "A kormányközeli média részletesen beszámolt Orbán Viktor amerikai útjáról, kiemelve a béketárgyalások és a gazdasági együttműködés fontosságát, valamint a Wizz Air géppel való utazás tényét. Ugyanezen források hangsúlyosan foglalkoztak a Tisza Párt adatvédelmi botrányával, belső levelezések kiszivárogtatásával és Fidesz-politikusok éles kritikájával. Az ellenzéki és független források szintén megerősítették az utazás tényét és a delegáció összetételét, valamint az adatvédelmi incidensről szóló híreket, de a Tisza Párt reakcióját és a politikai elemzők véleményét is bemutatták, akik szerint az ügy nem feltétlenül befolyásolja jelentősen a választói preferenciákat. A kormányközeli média erősebben politizálta az adatvédelmi ügyet, míg az ellenzéki és független források inkább a tényekre és a Tisza Párt válaszára koncentráltak, valamint a szélesebb politikai kontextusba helyezték az eseményeket.",
       "key_facts": [
-        "Orbán Viktor miniszterelnök az Egyesült Államokba utazik.",
-        "Találkozik Donald Trump korábbi elnökkel.",
-        "A megbeszélések fő témái az ukrajnai béketeremtés és a kétoldalú gazdasági/energetikai együttműködés.",
-        "A magyar delegáció Wizz Air járattal utazik."
+        "Orbán Viktor miniszterelnök az Egyesült Államokba utazik, hogy találkozzon Donald Trump volt elnökkel.",
+        "A delegáció egy bérelt Wizz Air géppel utazik, és több minisztert, valamint cégvezetőt is magában foglal.",
+        "Az út fő témái az ukrajnai béketeremtés és a kétoldalú gazdasági-energetikai együttműködés.",
+        "A Tisza Párt mobilalkalmazásával kapcsolatban adatvédelmi botrány alakult ki, belső levelezések szivárogtak ki.",
+        "Kormányközeli források szerint az alkalmazást tesztelés nélkül indították, és aktív bírók adatai is érintettek lehetnek.",
+        "A Tisza Párt elismerte az incidenst és a rendszer biztonságának folyamatos fejlesztését ígérte."
       ]
     },
     {
       "title_hu": "Halálos vonatbaleset Szentmártonkátánál",
-      "title_en": "Fatal Train Accident in Szentmártonkáta",
-      "summary_hu": "Tragikus vonatbaleset történt Szentmártonkátánál, ahol egy személyautó hajtott egy Intercity vonat elé egy vasúti átjárónál. Az autóban utazó hat személy közül öten életüket vesztették, egy 18 éves nő pedig túlélte az ütközést. A halálos áldozatok között fiatalok, köztük tinédzserek is vannak.\n\nA kormánypárti források, mint az Origo, Magyar Nemzet, Ripost és Kuruc.info, részletesen beszámolnak az esetről, kiemelve, hogy a gépkocsit egy fiatal fiú vezette, és az utasok állítólag egy elhalasztott közlekedési bírság megünneplése után hajtottak a sínekre. A sofőr édesapja is nyilatkozott a médiának a tragédiáról. A baloldali és független források, mint a HVG és a Magyar Hang, szintén megerősítik a halálos áldozatok számát és a baleset körülményeit, beleértve az elhalasztott bírság ünneplésének részletét is.",
-      "summary_en": "A tragic train accident occurred in Szentmártonkáta when a passenger car drove onto a railway crossing in front of an Intercity train. Out of the six occupants in the car, five lost their lives, while an 18-year-old woman survived the collision. The fatalities include young individuals, among them teenagers.\n\nGovernment-aligned sources, such as Origo, Magyar Nemzet, Ripost, and Kuruc.info, provide detailed reports on the incident, highlighting that the car was driven by a young man and that the occupants were reportedly celebrating a postponed traffic fine before driving onto the tracks. The driver's father also spoke to the media about the tragedy. Left-wing and independent sources, such as HVG and Magyar Hang, also confirm the number of fatalities and the circumstances of the accident, including the detail about celebrating a postponed fine.",
+      "title_en": "Fatal Train Accident near Szentmártonkáta",
+      "summary_hu": "Tragikus vonatbaleset történt Szentmártonkátánál, ahol egy személyautó egy Intercity vonat elé hajtott egy vasúti átjáróban. Az autóban utazó hat személy közül öten életüket vesztették, egy 18 éves nő pedig túlélte a balesetet. Az áldozatok között három tinédzser is volt, 15, 17 és 30 éves férfiak, valamint két 18 éves nő, akik közül az egyik a túlélő.\n\nA balesetet okozó autó sofőrje egy 24 éves férfi volt, aki a baleset napján vásárolta a járművet. A hírek szerint az autóban ülők egy elhalasztott közlekedési bírság megünneplésére indultak. A sofőr édesapja nyilatkozatában azt állította, hogy fia esetleg rendőröket próbált elkerülni, amikor a sínekre hajtott.",
+      "summary_en": "A tragic train accident occurred near Szentmártonkáta, where a passenger car drove in front of an Intercity train at a railway crossing. Five of the six occupants of the car died, while an 18-year-old woman survived. Among the victims were three teenagers, aged 15, 17, and 30, and two 18-year-old women, one of whom was the survivor.\n\nThe driver of the car, a 24-year-old man, had reportedly purchased the vehicle on the day of the accident. Reports indicate that the occupants were on their way to celebrate a postponed traffic fine. The driver's father stated that his son might have been trying to evade police when he drove onto the tracks.",
       "sources_analyzed": [
         "Origo",
         "Magyar Nemzet",
@@ -63,21 +49,46 @@
         "HVG",
         "Magyar Hang"
       ],
-      "perspective_comparison": "Mind a kormánypárti, mind a baloldali/független források tényként kezelik a baleset súlyosságát és az áldozatok számát. A kormánypárti források hajlamosak részletesebben kitérni a baleset okaira, például a sofőr életkorára és az ünneplés körülményeire, gyakran személyesebb hangvétellel, mint például a sofőr édesapjának nyilatkozatával. A baloldali/független források is megemlítik ezeket a részleteket, de általában tárgyilagosabb, kevésbé szenzációhajhász módon.",
+      "perspective_comparison": "Minden forrás tényként közölte a szentmártonkátai vonatbaleset tragikus részleteit, az áldozatok számát és a baleset körülményeit. A kormányközeli források (Origo, Magyar Nemzet, Ripost, Kuruc.info) kiemelték a sofőr édesapjának nyilatkozatát, miszerint fia rendőröket próbált elkerülni, és említették a „bulizás után” történt esetet. Az ellenzéki források (HVG, Magyar Hang) részletesebben kitértek az áldozatok életkorára és a túlélőre, valamint arra, hogy egy elhalasztott bírságot ünnepeltek. Az eltérő hangsúlyok ellenére az alapvető tények, mint az áldozatok száma és a baleset helyszíne, konzisztensek voltak.",
       "key_facts": [
-        "Vonatbaleset történt Szentmártonkátánál, ahol egy autó hajtott vonat elé.",
-        "Öt ember meghalt, egy 18 éves nő túlélte a balesetet.",
-        "Az áldozatok között fiatalok, tinédzserek is vannak.",
-        "A gépkocsit egy fiatal fiú vezette.",
-        "Az utasok állítólag egy elhalasztott közlekedési bírságot ünnepeltek a baleset előtt."
+        "Öt halálos áldozattal járt egy vonatbaleset Szentmártonkátánál.",
+        "Egy személyautó hajtott egy Intercity vonat elé egy vasúti átjáróban.",
+        "Az autóban hatan utaztak, egy 18 éves nő élte túl az esetet.",
+        "Az áldozatok között 15, 17 és 30 éves férfiak, valamint egy 18 éves nő volt.",
+        "Az autót egy 24 éves férfi vezette, aki a baleset napján vette a járművet.",
+        "A sofőr édesapja szerint fia rendőröket próbált elkerülni, az utasok pedig egy elhalasztott bírságot ünnepeltek."
+      ]
+    },
+    {
+      "title_hu": "Tömegbe hajtó autós Franciaországban és a Blikk főszerkesztőjének távozása",
+      "title_en": "Car Ramming in France and Blikk Editor-in-Chief's Departure",
+      "summary_hu": "Franciaország nyugati részén, az Oléron-szigeten egy autós szándékosan gyalogosok és kerékpárosok közé hajtott, legalább tíz embert megsebesítve. A gyanúsítottat sokkolóval terítették le, letartóztatásakor pedig „Allahu Akbar” kifejezést kiáltott. A hatóságok vizsgálják az eset körülményeit, beleértve az elkövető esetleges drog- vagy alkoholos befolyásoltságát.\n\nEközben Magyarországon Nagy Iván Zsolt, a Blikk volt főszerkesztője nyilatkozott távozásának körülményeiről. Elmondása szerint politikai és szakmai okai is voltak annak, hogy a lap tulajdonosváltása után elhagyta pozícióját. A Blikk kiadóját a közelmúltban vette át a kormányközeli Indamédia. Nagy Iván Zsolt hangsúlyozta, hogy ha egy médium kormányközelbe kerül, valamilyen formában a kormányzati kommunikáció részévé válik, és komoly kérdőjelei vannak azzal kapcsolatban, hogy az új tulajdonosok milyen szerepet szánnak a lapnak.",
+      "summary_en": "In western France, on Oléron Island, a driver deliberately drove into pedestrians and cyclists, injuring at least ten people. The suspect was subdued with a taser, and reportedly shouted \"Allahu Akbar\" upon arrest. Authorities are investigating the circumstances of the incident, including the possibility of the perpetrator being under the influence of drugs or alcohol.\n\nMeanwhile in Hungary, Iván Zsolt Nagy, the former editor-in-chief of Blikk, commented on the circumstances of his departure. He stated that both political and professional reasons led him to leave his position after the newspaper's ownership change. Blikk's publisher was recently acquired by the government-aligned Indamédia. Nagy Iván Zsolt emphasized that if a media outlet becomes close to the government, it inevitably becomes part of government communication in some form, and he has serious questions about the role the new owners intend for the newspaper.",
+      "sources_analyzed": [
+        "Origo",
+        "Magyar Nemzet",
+        "Kuruc.info",
+        "Telex",
+        "Index",
+        "444",
+        "Portfolio",
+        "Népszava",
+        "Blikk"
+      ],
+      "perspective_comparison": "A franciaországi tömegbe hajtásról szóló hírt minden forrás tényként közölte, kiemelve az \"Allahu Akbar\" kiáltást és a sérültek számát. A kormányközeli források (Origo, Magyar Nemzet, Kuruc.info) a cselekmény súlyosságát és az iszlamista felhangot hangsúlyozták. Az ellenzéki és független források (Telex, Index, 444, Portfolio) szintén beszámoltak az esetről, megemlítve a kiáltást és a sérülteket, de néhányan az elkövető esetleges drog- vagy alkoholos befolyásoltságát is megjegyezték. A Blikk főszerkesztőjének távozásáról szóló hírt elsősorban az ellenzéki és független források (Telex, Népszava, 444, Blikk) hozták le, kiemelve a politikai és szakmai okokat, valamint a kormányközeli tulajdonosváltás kontextusát. A kormányközeli média nem foglalkozott ezzel a témával.",
+      "key_facts": [
+        "Egy autós szándékosan gyalogosok és kerékpárosok közé hajtott Franciaországban, legalább tíz embert megsebesítve.",
+        "A gyanúsított letartóztatásakor \"Allahu Akbar\" kifejezést kiáltott.",
+        "Nagy Iván Zsolt, a Blikk volt főszerkesztője politikai és szakmai okokra hivatkozva távozott posztjáról.",
+        "A Blikk kiadóját a kormányközeli Indamédia vette át."
       ]
     }
   ],
-  "methodology_note_hu": "A hírösszefoglaló elkészítése során a cél a szigorú semlegesség és objektivitás fenntartása volt. Az azonosított top 2-3 hír esetében a különböző politikai irányultságú forrásokból származó információkat összevetettem, kiemelve a tényeket és jelezve, ha a források eltérő hangsúlyt vagy értelmezést adtak az eseményeknek. Kerültem a szubjektív, érzelmi töltetű nyelvezetet, és a verifiable tényekre koncentráltam. Ahol csak az egyik oldal számolt be egy részletről, ott ezt expliciten jeleztem.",
-  "methodology_note_en": "In preparing this news synthesis, the aim was to maintain strict neutrality and objectivity. For the identified top 2-3 news stories, information from sources of different political orientations was compared, highlighting facts and indicating where sources placed different emphasis or interpretation on events. Subjective or emotionally charged language was avoided, and the focus was on verifiable facts. Where only one side reported a detail, this was explicitly noted.",
+  "methodology_note_hu": "A hírösszefoglaló a különböző politikai irányultságú forrásokból származó cikkek elemzésén alapul. Az azonosított top 2-3 hír esetében a tényekre koncentráltam, igyekeztem kiszűrni a politikai interpretációkat és elfogultságokat. Ahol a források eltérő hangsúlyokat vagy kiegészítő információkat közöltek, ott ezt jeleztem, és igyekeztem a legteljesebb, legobjektívebb képet adni. A források citálása segít nyomon követni, mely információk honnan származnak.",
+  "methodology_note_en": "This news synthesis is based on an analysis of articles from various political perspectives. For the identified top 2-3 news stories, I focused on verifiable facts, striving to filter out political interpretations and biases. Where sources presented different emphases or supplementary information, I noted this and aimed to provide the most comprehensive and objective picture. Citing sources helps track the origin of each piece of information.",
   "metadata": {
-    "sources_scraped": 225,
-    "generation_time": "2025-11-05T14:00:43.800910",
+    "sources_scraped": 226,
+    "generation_time": "2025-11-05T13:15:15.606973",
     "ai_model": "gemini-2.5-flash"
   }
 }
