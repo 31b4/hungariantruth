@@ -1,0 +1,76 @@
+{
+  "sources": {
+    "right_wing": [
+      {
+        "name": "Origo",
+        "url": "origo.hu",
+        "type": "custom",
+        "scraper": "origo"
+      },
+      {
+        "name": "Magyar Nemzet",
+        "url": "magyarnemzet.hu",
+        "type": "rss",
+        "rss_url": "https://magyarnemzet.hu/feed/"
+      },
+      {
+        "name": "Mandiner",
+        "url": "mandiner.hu",
+        "type": "rss",
+        "rss_url": "https://mandiner.hu/rss"
+      }
+    ],
+    "left_wing": [
+      {
+        "name": "Telex",
+        "url": "telex.hu",
+        "type": "rss",
+        "rss_url": "https://telex.hu/rss"
+      },
+      {
+        "name": "HVG",
+        "url": "hvg.hu",
+        "type": "rss",
+        "rss_url": "https://hvg.hu/rss"
+      },
+      {
+        "name": "444",
+        "url": "444.hu",
+        "type": "rss",
+        "rss_url": "https://444.hu/feed"
+      },
+      {
+        "name": "Index",
+        "url": "index.hu",
+        "type": "rss",
+        "rss_url": "https://index.hu/24ora/rss/"
+      }
+    ],
+    "independent": [
+      {
+        "name": "Portfolio",
+        "url": "portfolio.hu",
+        "type": "rss",
+        "rss_url": "https://www.portfolio.hu/rss/all.xml"
+      },
+      {
+        "name": "Átlátszó",
+        "url": "atlatszo.hu",
+        "type": "rss",
+        "rss_url": "https://atlatszo.hu/feed/"
+      },
+      {
+        "name": "G7",
+        "url": "g7.hu",
+        "type": "rss",
+        "rss_url": "https://g7.hu/feed/"
+      }
+    ]
+  },
+  "scraping_settings": {
+    "max_articles_per_source": 10,
+    "max_article_age_hours": 24,
+    "timeout_seconds": 30
+  }
+}
+

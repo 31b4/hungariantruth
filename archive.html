@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hírek archívum - Magyar Igazság Hírek">
+    <title>Archívum | Magyar Igazság Hírek</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>
+                        <span class="logo-icon">📰</span>
+                        <span class="logo-text" data-hu="Magyar Igazság Hírek" data-en="Hungarian Truth News">
+                            Magyar Igazság Hírek
+                        </span>
+                    </h1>
+                    <p class="tagline" data-hu="Objektív, pártatlan hírek" data-en="Objective, unbiased news">
+                        Objektív, pártatlan hírek
+                    </p>
+                </div>
+                
+                <div class="header-controls">
+                    <button id="dark-mode-toggle" class="icon-btn" aria-label="Toggle dark mode">
+                        <span class="sun-icon">☀️</span>
+                        <span class="moon-icon">🌙</span>
+                    </button>
+                    
+                    <div class="language-toggle">
+                        <button id="lang-hu" class="lang-btn active" data-lang="hu">HU</button>
+                        <button id="lang-en" class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link" data-hu="Mai Hírek" data-en="Today's News">Mai Hírek</a>
+                <a href="archive.html" class="nav-link active" data-hu="Archívum" data-en="Archive">Archívum</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="hero-title" data-hu="Hírek Archívum" data-en="News Archive">
+                    Hírek Archívum
+                </h2>
+                <p class="hero-description" data-hu="Böngésszen a korábbi napok hírei között" 
+                   data-en="Browse previous days' news">
+                    Böngésszen a korábbi napok hírei között
+                </p>
+            </div>
+        </section>
+
+        <div class="archive-controls">
+            <div class="search-box">
+                <input type="text" 
+                       id="search-input" 
+                       class="search-input"
+                       data-placeholder-hu="Keresés a hírekben..." 
+                       data-placeholder-en="Search news..."
+                       placeholder="Keresés a hírekben...">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p data-hu="Archívum betöltése..." data-en="Loading archive...">Archívum betöltése...</p>
+        </div>
+
+        <div id="archive-list" class="archive-list">
+            <!-- Archive items will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p data-hu="A Magyar Igazság Hírek célja objektív, pártatlan tájékoztatás biztosítása a magyar olvasók számára." 
+                   data-en="Hungarian Truth News aims to provide objective, unbiased information for Hungarian readers.">
+                    A Magyar Igazság Hírek célja objektív, pártatlan tájékoztatás biztosítása a magyar olvasók számára.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/archive.js"></script>
+</body>
+</html>
+

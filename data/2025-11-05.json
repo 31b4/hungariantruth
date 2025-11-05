@@ -1,0 +1,52 @@
+{
+  "date": "2025-11-05",
+  "stories": [
+    {
+      "title_hu": "Példa hír: Költségvetési vita a parlamentben",
+      "title_en": "Example News: Budget Debate in Parliament",
+      "summary_hu": "A mai napon heves viták zajlottak a parlamentben a 2026-os költségvetésről. A kormánypárti források szerint a költségvetés gazdasági növekedést fog eredményezni, míg az ellenzéki források aggodalmakat fejeztek ki a várható hiányról.\n\nFüggeteken források megjegyzik, hogy mindkét oldal által hivatkozott számadatok részben megalapozottak, de eltérő módszerekkel számoltak. A vita középpontjában az egészségügyi és oktatási kiadások állnak.\n\nA költségvetés várhatóan a hónap végén kerül szavazásra.",
+      "summary_en": "Today saw heated debates in parliament regarding the 2026 budget. Government-aligned sources claim the budget will result in economic growth, while opposition sources expressed concerns about the projected deficit.\n\nIndependent sources note that the figures cited by both sides are partially substantiated but calculated using different methodologies. The debate centers on healthcare and education spending.\n\nThe budget is expected to be voted on at the end of the month.",
+      "sources_analyzed": [
+        "Origo",
+        "Magyar Nemzet",
+        "Telex",
+        "HVG",
+        "Portfolio"
+      ],
+      "perspective_comparison": "A kormánypárti média a gazdasági növekedési előrejelzésekre koncentrál, míg az ellenzéki média a szociális kiadások csökkentését emeli ki. A független gazdasági portálok mindkét oldal állításait elemzik számszerű adatokkal.",
+      "key_facts": [
+        "A költségvetési vitát november 5-én tartották",
+        "A szavazás várhatóan november végén lesz",
+        "Fő vitatémák: egészségügy és oktatás",
+        "Mindkét oldal eltérő módszerekkel számol"
+      ]
+    },
+    {
+      "title_hu": "Példa hír: Új közlekedési infrastruktúra bejelentés",
+      "title_en": "Example News: New Transportation Infrastructure Announcement",
+      "summary_hu": "A kormány bejelentette egy új autópálya-szakasz építésének tervét. A projekt várhatóan 2027-ben kezdődik.\n\nA kormánypárti források szerint ez munkahelyeket teremt és javítja a régiók közötti kapcsolatot. Az ellenzéki források kérdéseket tesznek fel a finanszírozással és környezeti hatásokkal kapcsolatban.\n\nFüggeteln szakértők megjegyzik, hogy hasonló projektek vegyes eredményeket hoztak a múltban.",
+      "summary_en": "The government announced plans to build a new highway section. The project is expected to begin in 2027.\n\nGovernment-aligned sources say this will create jobs and improve regional connectivity. Opposition sources raise questions about financing and environmental impact.\n\nIndependent experts note that similar projects have had mixed results in the past.",
+      "sources_analyzed": [
+        "Mandiner",
+        "444",
+        "Index",
+        "G7"
+      ],
+      "perspective_comparison": "A kormányzati médiumok a gazdasági előnyöket hangsúlyozzák, míg az ellenzéki források a környezeti aggályokat és költségeket emelik ki.",
+      "key_facts": [
+        "Az építkezés 2027-ben kezdődik",
+        "Új autópálya-szakaszról van szó",
+        "Vita folyik a finanszírozásról",
+        "Környezeti hatásvizsgálat szükséges"
+      ]
+    }
+  ],
+  "methodology_note_hu": "Ezt a szintézist a Google Gemini AI készítette, elemezve kormánypárti (Origo, Magyar Nemzet, Mandiner), ellenzéki (Telex, HVG, 444, Index) és független (Portfolio, G7, Átlátszó) forrásokat. A cél egy kiegyensúlyozott, tényalapú tájékoztatás nyújtása, amely bemutatja a különböző nézőpontokat anélkül, hogy elfogult lenne.",
+  "methodology_note_en": "This synthesis was created by Google Gemini AI, analyzing government-aligned (Origo, Magyar Nemzet, Mandiner), opposition (Telex, HVG, 444, Index), and independent (Portfolio, G7, Átlátszó) sources. The goal is to provide balanced, fact-based information that presents different perspectives without bias.",
+  "metadata": {
+    "sources_scraped": 9,
+    "generation_time": "2025-11-05T06:00:00",
+    "ai_model": "gemini-pro"
+  }
+}
+

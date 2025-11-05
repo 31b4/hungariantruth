@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Objektív, pártatlan hírek Magyarország számára - Unbiased news for Hungary">
+    <title>Magyar Igazság Hírek | Hungarian Truth News</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>
+                        <span class="logo-icon">📰</span>
+                        <span class="logo-text" data-hu="Magyar Igazság Hírek" data-en="Hungarian Truth News">
+                            Magyar Igazság Hírek
+                        </span>
+                    </h1>
+                    <p class="tagline" data-hu="Objektív, pártatlan hírek" data-en="Objective, unbiased news">
+                        Objektív, pártatlan hírek
+                    </p>
+                </div>
+                
+                <div class="header-controls">
+                    <button id="dark-mode-toggle" class="icon-btn" aria-label="Toggle dark mode">
+                        <span class="sun-icon">☀️</span>
+                        <span class="moon-icon">🌙</span>
+                    </button>
+                    
+                    <div class="language-toggle">
+                        <button id="lang-hu" class="lang-btn active" data-lang="hu">HU</button>
+                        <button id="lang-en" class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link active" data-hu="Mai Hírek" data-en="Today's News">Mai Hírek</a>
+                <a href="archive.html" class="nav-link" data-hu="Archívum" data-en="Archive">Archívum</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="hero-title" data-hu="A mai nap legfontosabb hírei" data-en="Today's Most Important News">
+                    A mai nap legfontosabb hírei
+                </h2>
+                <p class="hero-description" data-hu="Minden nap reggel 6 órakor frissül - jobboldali, baloldali és független forrásokból szintetizálva" 
+                   data-en="Updated daily at 6 AM - synthesized from right-wing, left-wing, and independent sources">
+                    Minden nap reggel 6 órakor frissül - jobboldali, baloldali és független forrásokból szintetizálva
+                </p>
+            </div>
+        </section>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p data-hu="Hírek betöltése..." data-en="Loading news...">Hírek betöltése...</p>
+        </div>
+
+        <div id="error" class="error-message" style="display: none;">
+            <p data-hu="Hiba történt a hírek betöltése során. Kérjük, próbálja újra később." 
+               data-en="Error loading news. Please try again later.">
+                Hiba történt a hírek betöltése során. Kérjük, próbálja újra később.
+            </p>
+        </div>
+
+        <div id="news-date" class="news-date"></div>
+
+        <div id="news-container" class="news-container">
+            <!-- News stories will be dynamically inserted here -->
+        </div>
+
+        <section class="methodology">
+            <details>
+                <summary data-hu="📊 Módszertan - Hogyan készítjük a szintézist?" 
+                         data-en="📊 Methodology - How we create the synthesis">
+                    📊 Módszertan - Hogyan készítjük a szintézist?
+                </summary>
+                <div id="methodology-content" class="methodology-content">
+                    <!-- Dynamically loaded -->
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p data-hu="A Magyar Igazság Hírek célja objektív, pártatlan tájékoztatás biztosítása a magyar olvasók számára." 
+                   data-en="Hungarian Truth News aims to provide objective, unbiased information for Hungarian readers.">
+                    A Magyar Igazság Hírek célja objektív, pártatlan tájékoztatás biztosítása a magyar olvasók számára.
+                </p>
+                <p class="footer-note">
+                    <span data-hu="Források elemezve: kormánypárti, ellenzéki és független hírportálok" 
+                          data-en="Sources analyzed: government-aligned, opposition, and independent news portals">
+                        Források elemezve: kormánypárti, ellenzéki és független hírportálok
+                    </span>
+                    <br>
+                    <span data-hu="AI támogatás: Google Gemini" data-en="AI powered by: Google Gemini">
+                        AI támogatás: Google Gemini
+                    </span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
+
