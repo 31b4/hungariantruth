@@ -2,82 +2,88 @@
   "date": "2025-11-05",
   "stories": [
     {
-      "title_hu": "Orbán Viktor amerikai látogatása és találkozója Donald Trumppal",
-      "title_en": "Viktor Orbán's US Visit and Meeting with Donald Trump",
-      "summary_hu": "Orbán Viktor miniszterelnök csütörtökön utazik az Egyesült Államokba, ahol pénteken találkozik Donald Trumppal. A delegációban több miniszter és gazdasági vezető is helyet kapott, és egy Wizz Air különgéppel utaznak Washingtonba. A találkozó fő témái az ukrajnai béketeremtés lehetőségei, valamint a kétoldalú gazdasági és energetikai együttműködés erősítése lesznek.\n\nSzijjártó Péter külgazdasági és külügyminiszter tájékoztatása szerint a magyar delegáció a Fehér Ház melletti Blair House-ban száll meg, amit az amerikaiak Magyarország iránti tisztelete jeleként értelmeznek. A kormányzati kommunikáció hangsúlyozza a békepárti álláspontot és Trump békeerőfeszítéseinek támogatását.",
-      "summary_en": "Prime Minister Viktor Orbán is traveling to the United States on Thursday for a meeting with Donald Trump on Friday. The delegation includes several ministers and economic leaders, and they will travel to Washington on a special Wizz Air flight. The main topics of the meeting will be the possibilities for peace in Ukraine and strengthening bilateral economic and energy cooperation.\n\nAccording to Minister of Foreign Affairs and Trade Péter Szijjártó, the Hungarian delegation will stay at Blair House, next to the White House, which is interpreted as a sign of American respect for Hungary. Government communication emphasizes a pro-peace stance and support for Trump's peace efforts.",
+      "title_hu": "Orbán Viktor washingtoni látogatása és a magyar-amerikai kapcsolatok",
+      "title_en": "Viktor Orbán's Visit to Washington and Hungarian-American Relations",
+      "summary_hu": "Orbán Viktor miniszterelnök washingtoni látogatása a nap egyik kiemelt eseménye, ahol Donald Trumppal találkozik. A kormányközeli források szerint a találkozó a magyar-amerikai kapcsolatok „aranykorának” új fejezetét nyithatja meg, és történelmi jelentőségű megállapodásokra kerülhet sor, különösen a stratégiai-gazdasági együttműködés terén. Orbán Viktor maga is megerősítette, hogy a látogatás célja a stratégiai-gazdasági együttműködés kialakítása egy esetleges Trump-kormányzattal.\n\nAz ellenzéki és független sajtó is kiemelt figyelmet szentel a találkozónak, hangsúlyozva annak potenciális hatását a nemzetközi politikára, különösen az ukrajnai háborúval és a szankciókkal kapcsolatban. A találkozó időzítése, Trump esetleges visszatérése az elnöki székbe, különös jelentőséget tulajdonít az eseménynek, és mind Moszkva, mind Kijev árgus szemmel figyeli a fejleményeket. A delegációban kormánytagok, nagyvállalatok vezetői, újságírók és kutatóműhelyek képviselői is részt vesznek.",
+      "summary_en": "Prime Minister Viktor Orbán's visit to Washington, where he is meeting with Donald Trump, is one of the day's top events. Government-aligned sources suggest the meeting could open a new chapter in the 'golden age' of Hungarian-American relations, potentially leading to historically significant agreements, particularly in strategic-economic cooperation. Viktor Orbán himself confirmed that the visit aims to establish strategic-economic cooperation with a potential Trump administration.\n\nOpposition and independent media also pay close attention to the meeting, emphasizing its potential impact on international politics, especially concerning the war in Ukraine and sanctions. The timing of the meeting, in light of Trump's potential return to the presidency, lends particular significance to the event, with both Moscow and Kyiv closely monitoring developments. The delegation includes government officials, leaders of major companies, journalists, and representatives of research institutions.",
       "sources_analyzed": [
         "Origo",
-        "Mandiner",
         "Ripost",
+        "PestiSrácok",
+        "Hirado",
+        "Index",
+        "24.hu",
+        "Magyar Hang",
+        "Vadhajtások"
+      ],
+      "perspective_comparison": "A kormánypárti források (Origo, Ripost, PestiSrácok, Hirado) a találkozót a magyar-amerikai kapcsolatok „aranykorának” kezdeteként és stratégiai-gazdasági együttműködés kialakításának lehetőségeként mutatják be, kiemelve Orbán Viktor béke melletti álláspontját. Az ellenzéki és független források (Index, 24.hu, Magyar Hang) szintén fontosnak tartják az eseményt, de inkább a Trump esetleges visszatérésével járó nemzetközi politikai következményekre, a szankciók és a háború alakulására fókuszálnak, esetenként kritikus hangnemben kezelve Orbán „béke” retorikáját. A Vadhajtások egyenesen azzal vádolja a Telexet, hogy hazudott Orbán washingtoni útjáról.",
+      "key_facts": [
+        "Orbán Viktor miniszterelnök Washingtonban találkozik Donald Trumppal.",
+        "A találkozó célja a stratégiai-gazdasági együttműködés kialakítása egy esetleges Trump-kormányzattal.",
+        "A delegációban kormánytagok, üzleti vezetők és média képviselői is részt vesznek.",
+        "A találkozó potenciális hatással lehet a nemzetközi politikára, különösen az ukrajnai háborúra és a szankciókra."
+      ]
+    },
+    {
+      "title_hu": "Adatszivárgási botrány a Tisza Párt körül és politikai reakciók",
+      "title_en": "Data Leak Scandal Around Tisza Party and Political Reactions",
+      "summary_hu": "A Tisza Párt telefonos alkalmazásával, a Tisza Világgal kapcsolatos adatszivárgási botrány és az azt követő politikai reakciók uralják a belpolitikai híreket. Kormányközeli források szerint belső levelezések szivárogtak ki az alkalmazás fejlesztőinek köréből, amelyek arra utalnak, hogy a program még nem volt kész, amikor elindították, és „elég sok sebből vérzik”. A vádak szerint a párt mindent megtett az adatszivárgás nyomainak eltüntetésére, és felmerült a gyanú, hogy akár 200 ezer magyar állampolgár adatai kerülhettek illetéktelen kezekbe. Egy Lázár Jánoshoz kötődő lap, a Promenád24 névvel és munkahellyel listázta az állítólagos hódmezővásárhelyi érintetteket, amit az ellenzéki sajtó élesen kritizált.\n\nMagyar Péter, a Tisza Párt vezetője, a legújabb országjárása során „mentális terrorról” beszélt, és a „rettegő hatalmat” vádolta azzal, hogy „háborút indított a saját nemzete ellen”. Számon kérte Orbán Viktor Mihály adatvédelmi szakértőt (utalva a miniszterelnökre) a korábbi állami adatszivárgásokkal kapcsolatban. A Závecz-kutatás szerint a Tisza Párt továbbra is vezet a Fidesz előtt a biztos szavazók körében, de a 21 Kutatóközpont mandátumkalkulátora szerint a Fidesz még Tisza-fölény esetén is abszolút többséget szerezhet a választási rendszer miatt.",
+      "summary_en": "The data leak scandal surrounding the Tisza Party's mobile application, Tisza Világ, and the subsequent political reactions dominate domestic news. Government-aligned sources claim internal correspondence from the app's developers leaked, suggesting the program was not ready upon launch and 'bleeding from many wounds.' Accusations include the party attempting to cover up the data leak, with suspicions that data of up to 200,000 Hungarian citizens may have fallen into unauthorized hands. A publication linked to János Lázár, Promenád24, listed alleged affected individuals from Hódmezővásárhely by name and workplace, which was sharply criticized by opposition media.\n\nMagyar Péter, leader of the Tisza Party, spoke of 'mental terror' during his latest national tour, accusing the 'frightened power' of 'waging war against its own nation.' He questioned data protection expert Viktor Mihály Orbán (referring to the Prime Minister) regarding previous state data leaks. According to a Závecz poll, the Tisza Party continues to lead Fidesz among decided voters, but the 21 Research Center's mandate calculator suggests Fidesz could still secure an absolute majority due to the electoral system, even with a Tisza lead.",
+      "sources_analyzed": [
+        "Magyar Nemzet",
+        "Mandiner",
         "Demokrata",
+        "Vadhajtások",
         "PestiSrácok",
         "Hirado",
         "Telex",
-        "Népszava",
+        "HVG",
+        "444",
         "Index",
-        "ATV",
-        "Portfolio",
-        "Blikk"
-      ],
-      "perspective_comparison": "A kormányközeli források kiemelten hangsúlyozzák a látogatás célját, mint az ukrajnai béketeremtést és a stratégiai-gazdasági együttműködés kialakítását egy esetleges Trump-kormányzattal, a Wizz Air különgépes utazást és a Blair House-ban való elszállásolást pedig az amerikai tisztelet jeleként mutatják be. Az ellenzéki és független források megerősítik az utazás tényét, a delegáció összetételét és a Wizz Air gép használatát, valamint a bejelentett témákat, de kevésbé kommentálják a diplomáciai jelentőségét, inkább a tényekre fókuszálnak.",
-      "key_facts": [
-        "Orbán Viktor miniszterelnök november 7-én találkozik Donald Trumppal Washingtonban.",
-        "A magyar delegáció Wizz Air különgéppel utazik, és több minisztert, valamint gazdasági vezetőt is magában foglal.",
-        "A megbeszélések fő témái az ukrajnai béketeremtés és a kétoldalú gazdasági-energetikai együttműködés lesznek."
-      ]
-    },
-    {
-      "title_hu": "Adatvédelmi aggályok a Tisza Párt mobilalkalmazása körül és politikai reakciók",
-      "title_en": "Data Privacy Concerns Surrounding Tisza Party's Mobile Application and Political Reactions",
-      "summary_hu": "Kontroverszia alakult ki a Tisza Párt „Tisza Világ” elnevezésű mobilalkalmazása körül, miután állítólagos adatszivárgás történt, amely közel 200 000 felhasználó személyes adatait érintheti. Kormányközeli források szerint belső hangfelvételek és levelezések bizonyítják, hogy az alkalmazást megfelelő tesztelés nélkül indították el, és aktív bírók adatai is kiszivároghattak, amelyek akár egy „háborúban álló ország” kezébe is kerülhettek.\n\nA kormányzati politikusok, mint Szentkirályi Alexandra, Kocsis Máté és Gulyás Gergely, élesen bírálták Magyar Pétert, felelőtlenséggel, hazugsággal és a támogatók veszélyeztetésével vádolva őt, valamint nemzetbiztonsági kérdésként kezelve az ügyet. Eközben Magyar Péter közzétette a „Nemzet Hangja” online szavazás második fordulójának eredményeit, ahol a résztvevők nagy arányban támogatták a vagyonadó bevezetését és a gyermekvédelmi rendszer független vizsgálatát. Egy Oroszország-szakértő szerint az adatügy súlyos, de a kormányzati narratíva időzítése és a potenciális külföldi szereplők megnevezése kapcsán is felmerülnek kérdések.",
-      "summary_en": "A controversy has arisen around the Tisza Party's mobile application, 'Tisza Világ,' following an alleged data leak that could affect nearly 200,000 users' personal data. Government-aligned sources claim that internal audio recordings and correspondence prove the application was launched without proper testing, and that data of active judges may have also leaked, potentially falling into the hands of a 'warring country.'\n\nGovernment politicians, such as Alexandra Szentkirályi, Máté Kocsis, and Gergely Gulyás, sharply criticized Péter Magyar, accusing him of irresponsibility, lying, and endangering supporters, treating the matter as a national security issue. Meanwhile, Péter Magyar published the results of the second round of his 'Voice of the Nation' online poll, where participants largely supported the introduction of a wealth tax and an independent investigation into the child protection system. A Russia expert stated that the data issue is serious, but questions have been raised regarding the timing of the government's narrative and the naming of potential foreign actors.",
-      "sources_analyzed": [
-        "Origo",
-        "Magyar Nemzet",
-        "Mandiner",
-        "Vadhajtások",
-        "Kuruc.info",
-        "PestiSrácok",
-        "HVG",
-        "Népszava",
         "24.hu",
+        "ATV",
+        "Népszava",
         "Magyar Hang",
-        "Partizán"
+        "Partizán",
+        "Átlátszó"
       ],
-      "perspective_comparison": "A kormányközeli források rendkívül élesen támadják a Tisza Pártot és Magyar Pétert, az adatszivárgást súlyos nemzetbiztonsági kockázatként, a pártvezetőt pedig felelőtlennek és megbízhatatlannak állítva be. Hangfelvételekre és belső levelezésekre hivatkoznak, amelyek szerint az applikációt tesztelés nélkül indították el. Az ellenzéki és független források elismerik az adatvédelmi incidens súlyosságát, de egyesek megkérdőjelezik a kormányzati narratíva időzítését és a feltételezett külföldi érdekelt felek megnevezését. Emellett az ellenzéki média beszámol Magyar Péter saját online szavazásának eredményeiről, amely a kormányzati kritikával szemben a párt népszerűségét hivatott demonstrálni.",
+      "perspective_comparison": "A kormánypárti források (Magyar Nemzet, Mandiner, Demokrata, Vadhajtások, PestiSrácok, Hirado) a Tisza Párt körüli adatszivárgást súlyos botrányként kezelik, belső levelezésekre és hangfelvételekre hivatkozva állítják, hogy a párt el akarta titkolni a problémát, és Magyar Péter hitelességét kérdőjelezik meg. Az ellenzéki és független források (Telex, 444, Index, 24.hu, ATV, Népszava, Magyar Hang, Partizán, Átlátszó) beszámolnak az adatszivárgásról és a Promenád24 általi névlistázásról, de Magyar Péter védekezését és a kormányt ért kritikáit is bemutatják. A mandátumkalkulátorokról szóló cikkek a választási rendszer Fidesznek kedvező aspektusait elemzik, függetlenül a pártpreferenciáktól.",
       "key_facts": [
-        "A Tisza Párt „Tisza Világ” mobilalkalmazása körül adatszivárgási botrány alakult ki, amely állítólagosan közel 200 000 felhasználó adatait érinti.",
-        "Kormányközeli források szerint az alkalmazást tesztelés nélkül indították el, és aktív bírók adatai is kiszivároghattak.",
-        "A kormányzati politikusok nemzetbiztonsági kérdésként kezelik az ügyet, míg Magyar Péter a „Nemzet Hangja” szavazás eredményeit tette közzé."
+        "Adatszivárgás történt a Tisza Párt Tisza Világ nevű alkalmazásából.",
+        "Kormányközeli források szerint a párt megpróbálta eltüntetni a nyomokat és az alkalmazás hibás volt.",
+        "Egy pro-kormányzati lap, a Promenád24, névvel és munkahellyel listázta az állítólagos érintetteket.",
+        "Magyar Péter „mentális terrorról” beszélt, és a kormányt vádolta adatszivárgásokkal kapcsolatos képmutatással.",
+        "A közvélemény-kutatások szerint a Tisza Párt vezet a Fidesz előtt, de a választási rendszer a Fidesznek kedvezhet a mandátumok elosztásában."
       ]
     },
     {
-      "title_hu": "Halálos vonatbaleset Szentmártonkátán",
-      "title_en": "Fatal Train Accident in Szentmártonkáta",
-      "summary_hu": "Tragikus vonatbaleset történt Szentmártonkátán, ahol egy Intercity vonat személyautóval ütközött egy vasúti átjáróban. Az autóban utazó hat személy közül öten életüket vesztették, egy 18 éves nő pedig túlélte a balesetet. Az áldozatok között több fiatal is volt, köztük tinédzserek.\n\nA baleset körülményeivel kapcsolatban a gépjármű sofőrjének édesapja nyilatkozott, aki szerint fia valószínűleg a rendőrök elől próbált menekülni egy buli után. Más források szerint a társaság egy közlekedési bírság elhalasztását ünnepelte a tragédia előtt.",
-      "summary_en": "A tragic train accident occurred in Szentmártonkáta, where an Intercity train collided with a car at a railway crossing. Five of the six occupants of the car died, while an 18-year-old woman survived the incident. Several young individuals, including teenagers, were among the victims.\n\nRegarding the circumstances of the accident, the driver's father stated that his son was likely trying to evade police after a party. Other reports suggest the group was celebrating the postponement of a traffic fine before the tragedy.",
+      "title_hu": "Kárpátaljai magyar diákok sorozási ügye Ukrajnában",
+      "title_en": "Conscription Case of Transcarpathian Hungarian Students in Ukraine",
+      "summary_hu": "Négy kárpátaljai magyar diákot, a beregszászi Rákóczi-egyetem hallgatóit tartóztattak fel az ukrán hadkiegészítő központok, sorozás céljából. A diákokat több mint 24 órán keresztül fogva tartották. Az ukrán jogszabályok értelmében az egyetemi hallgatók mentesülnek a katonai szolgálat alól, így az eset jogellenesnek minősült.\n\nA Kárpátaljai Magyar Kulturális Szövetség (KMKSZ) nyilatkozatban tiltakozott és levélben fordult az illetékes ukrán szervekhez. Szijjártó Péter külgazdasági és külügyminiszter is hírt adott az esetről, hangsúlyozva a béke fontosságát. A diplomáciai lépések és a jogszabályi mentesség érvényesítése nyomán a diákokat végül hazaengedték.",
+      "summary_en": "Four Transcarpathian Hungarian students, enrolled at the Rákóczi University in Berehove, were detained by Ukrainian conscription centers for military enlistment. The students were held for over 24 hours. Under Ukrainian law, university students are exempt from military service, making the detention unlawful.\n\nThe Cultural Alliance of Hungarians in Transcarpathia (KMKSZ) issued a protest statement and formally contacted the relevant Ukrainian authorities. Péter Szijjártó, Minister of Foreign Affairs and Trade, also reported on the incident, emphasizing the importance of peace. Following diplomatic efforts and the enforcement of legal exemptions, the students were eventually released.",
       "sources_analyzed": [
-        "Origo",
-        "Magyar Nemzet",
-        "Ripost",
+        "Demokrata",
         "Kuruc.info",
+        "Vadhajtások",
         "HVG",
-        "Magyar Hang"
+        "444",
+        "Mandiner"
       ],
-      "perspective_comparison": "Minden forrás egyöntetűen beszámol a tragédia tényeiről és az áldozatok számáról. A kormányközeli források részletesen kitérnek a sofőr édesapjának nyilatkozatára, miszerint fia rendőrök elől menekülhetett egy buli után. Az ellenzéki források szintén kiemelik az áldozatok fiatal korát, és megemlítik, hogy a csoport egy közlekedési bírság elhalasztását ünnepelte a baleset előtt.",
+      "perspective_comparison": "A kormánypárti források (Demokrata, Kuruc.info, Vadhajtások) az esetet súlyos jogsértésként és a béke fontosságának újabb bizonyítékaként tálalják, kiemelve Szijjártó Péter beavatkozását. A Kuruc.info „túszul ejtett” diákokról ír. Az ellenzéki források (HVG, 444) tényközlőbben számolnak be az esetről, megerősítve a diákok jogszabályi mentességét és a sikeres szabadon bocsátásukat. A Vadhajtások egy ponton arról írt, hogy két diákot elengedtek, de kettő még fogva van, de a többi forrás és Szijjártó nyilatkozata a pozitív végkifejletet hangsúlyozza, ami a diákok teljes szabadon bocsátását jelenti.",
       "key_facts": [
-        "Öt halálos áldozata van a szentmártonkátai vonatbalesetnek, egy 18 éves nő túlélte.",
-        "Az autóban utazók között több fiatal is volt.",
-        "A sofőr édesapja szerint fia a rendőrök elől menekülhetett, más források szerint egy bírság elhalasztását ünnepelték."
+        "Négy kárpátaljai magyar diákot tartóztattak fel ukrán hadkiegészítő központok sorozás céljából.",
+        "A diákokat több mint 24 órán keresztül fogva tartották.",
+        "Az ukrán jogszabályok szerint az egyetemi hallgatók mentesülnek a katonai szolgálat alól.",
+        "A Kárpátaljai Magyar Kulturális Szövetség (KMKSZ) és Szijjártó Péter is fellépett az ügyben.",
+        "A diákokat végül hazaengedték."
       ]
     }
   ],
-  "methodology_note_hu": "A hírösszefoglaló a különböző politikai irányultságú forrásokból származó cikkek elemzésével készült, a tényekre és az objektív információkra fókuszálva. Célja a pártatlan tájékoztatás, elkerülve a szubjektív értelmezéseket és az érzelmi töltetű nyelvezetet. A források közötti eltéréseket a tények bemutatásában vagy az események hangsúlyozásában külön jelezzük.",
-  "methodology_note_en": "This news synthesis was prepared by analyzing articles from various political perspectives, focusing on facts and objective information. The aim is to provide unbiased reporting, avoiding subjective interpretations and emotionally charged language. Differences between sources in presenting facts or emphasizing events are explicitly noted.",
+  "methodology_note_hu": "A hírösszefoglaló a rendelkezésre álló jobboldali/kormánypárti, baloldali/ellenzéki és független források elemzésével készült. A legfontosabb híreket a gyakoriság, a téma súlya és a potenciális hatás alapján azonosítottuk. Az egyes történetekről szóló összefoglalók a tényekre koncentrálnak, elkerülve a politikai értékítéleteket. A források eltérő megközelítéseit és hangsúlyait külön bekezdésben mutatjuk be, jelezve, hogy mely források milyen információkat vagy értelmezéseket közöltek. Célunk a pártatlan, objektív tájékoztatás.",
+  "methodology_note_en": "This news synthesis was prepared by analyzing available right-wing/government-aligned, left-wing/opposition, and independent sources. The most important news stories were identified based on frequency, thematic significance, and potential impact. Summaries for each story focus on verifiable facts, avoiding political judgments. Different perspectives and emphases from various sources are presented in a separate paragraph, indicating which sources reported what information or interpretations. Our goal is to provide impartial, objective information.",
   "metadata": {
-    "sources_scraped": 226,
-    "generation_time": "2025-11-05T13:41:42.339432",
+    "sources_scraped": 227,
+    "generation_time": "2025-11-06T05:06:38.244545",
     "ai_model": "gemini-2.5-flash"
   }
 }
