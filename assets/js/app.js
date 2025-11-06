@@ -110,19 +110,50 @@ async function loadTodayNews() {
     const newsContainer = document.getElementById('news-container');
     
     try {
-        // Get today's date
-        const today = new Date();
-        const dateStr = formatDate(today);
+        // Check URL parameters first (for archive links)
+        const urlParams = new URLSearchParams(window.location.search);
+        const dateParam = urlParams.get('date');
         
-        // Try to load today's news
-        let data = await loadNewsData(dateStr);
+        // Check sessionStorage for archive data
+        const archiveDate = sessionStorage.getItem('archiveDate');
+        const archiveData = sessionStorage.getItem('archiveData');
         
-        // If today's news doesn't exist, try yesterday
+        let data = null;
+        let dateStr = null;
+        
+        // Priority 1: Archive data from sessionStorage
+        if (archiveDate && archiveData) {
+            try {
+                data = JSON.parse(archiveData);
+                dateStr = archiveDate;
+                // Clear after use
+                sessionStorage.removeItem('archiveDate');
+                sessionStorage.removeItem('archiveData');
+            } catch (e) {
+                console.warn('Failed to parse archive data from sessionStorage');
+            }
+        }
+        
+        // Priority 2: Date from URL parameter
+        if (!data && dateParam) {
+            dateStr = dateParam;
+            data = await loadNewsData(dateParam);
+        }
+        
+        // Priority 3: Today's news
         if (!data) {
+            const today = new Date();
+            dateStr = formatDate(today);
+            data = await loadNewsData(dateStr);
+        }
+        
+        // Priority 4: Yesterday's news (fallback)
+        if (!data) {
+            const today = new Date();
             const yesterday = new Date(today);
             yesterday.setDate(yesterday.getDate() - 1);
-            const yesterdayStr = formatDate(yesterday);
-            data = await loadNewsData(yesterdayStr);
+            dateStr = formatDate(yesterday);
+            data = await loadNewsData(dateStr);
         }
         
         if (data) {

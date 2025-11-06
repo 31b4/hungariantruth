@@ -20,7 +20,7 @@ async function loadArchive() {
     const archiveList = document.getElementById('archive-list');
     
     try {
-        // Scan for available data files
+        // Get list of dates from index.json (fastest method)
         const dataFiles = await discoverDataFiles();
         
         if (dataFiles.length === 0) {
@@ -35,36 +35,63 @@ async function loadArchive() {
             return;
         }
         
-        // Load archive data in parallel (all at once is fine for small datasets)
-        const archivePromises = dataFiles.map(async (dateStr) => {
-            try {
-                const data = await window.appUtils.loadNewsData(dateStr);
-                if (data) {
-                    return {
-                        date: dateStr,
-                        displayDate: window.appUtils.formatDisplayDate(dateStr),
-                        storyCount: data.stories ? data.stories.length : 0,
-                        data: data
-                    };
-                }
-            } catch (err) {
-                console.warn(`Failed to load ${dateStr}:`, err);
-            }
-            return null;
-        });
-        
-        archiveData = (await Promise.all(archivePromises))
-            .filter(item => item !== null)
-            .sort((a, b) => new Date(b.date) - new Date(a.date));
+        // Create archive items immediately (don't wait for story counts)
+        archiveData = dataFiles.map(dateStr => ({
+            date: dateStr,
+            displayDate: window.appUtils.formatDisplayDate(dateStr),
+            storyCount: null, // Will load lazily
+            data: null
+        })).sort((a, b) => new Date(b.date) - new Date(a.date));
         
         filteredArchive = [...archiveData];
         displayArchive();
         loading.style.display = 'none';
         
+        // Load story counts in background (non-blocking)
+        loadStoryCountsInBackground();
+        
     } catch (err) {
         console.error('Error loading archive:', err);
         loading.style.display = 'none';
     }
+}
+
+// Load story counts in background without blocking display
+async function loadStoryCountsInBackground() {
+    const promises = archiveData.map(async (item) => {
+        try {
+            const response = await fetch(`data/${item.date}.json`, { cache: 'no-cache' });
+            if (response.ok) {
+                const data = await response.json();
+                item.storyCount = data.stories ? data.stories.length : 0;
+                // Update the display for this item
+                updateArchiveItemCount(item);
+            }
+        } catch (err) {
+            item.storyCount = 0;
+        }
+    });
+    
+    await Promise.all(promises);
+}
+
+function updateArchiveItemCount(item) {
+    const archiveList = document.getElementById('archive-list');
+    if (!archiveList) return;
+    
+    // Find and update the specific item
+    const items = archiveList.querySelectorAll('.archive-item');
+    items.forEach((element, index) => {
+        if (archiveData[index] === item) {
+            const countElement = element.querySelector('.archive-story-count');
+            if (countElement && item.storyCount !== null) {
+                const storyCountText = currentLanguage === 'hu'
+                    ? `${item.storyCount} történet`
+                    : `${item.storyCount} ${item.storyCount === 1 ? 'story' : 'stories'}`;
+                countElement.textContent = storyCountText;
+            }
+        }
+    });
 }
 
 // =============================================
@@ -149,59 +176,22 @@ function displayArchive() {
 function createArchiveItem(item) {
     const div = document.createElement('a');
     div.className = 'archive-item';
-    div.href = `?date=${item.date}`;
+    div.href = `index.html?date=${item.date}`;
     
-    const storyCountText = currentLanguage === 'hu'
-        ? `${item.storyCount} történet`
-        : `${item.storyCount} ${item.storyCount === 1 ? 'story' : 'stories'}`;
+    const storyCountText = item.storyCount !== null
+        ? (currentLanguage === 'hu'
+            ? `${item.storyCount} történet`
+            : `${item.storyCount} ${item.storyCount === 1 ? 'story' : 'stories'}`)
+        : (currentLanguage === 'hu' ? 'Betöltés...' : 'Loading...');
     
     div.innerHTML = `
         <div class="archive-date">${window.appUtils.escapeHtml(item.displayDate)}</div>
         <div class="archive-story-count">${storyCountText}</div>
     `;
     
-    // Override default link behavior to load inline
-    div.addEventListener('click', (e) => {
-        e.preventDefault();
-        loadArchiveDate(item.date, item.data);
-    });
-    
     return div;
 }
 
-// =============================================
-// Load Specific Archive Date
-// =============================================
-function loadArchiveDate(dateStr, data) {
-    // Store the data and redirect to index page
-    sessionStorage.setItem('archiveDate', dateStr);
-    sessionStorage.setItem('archiveData', JSON.stringify(data));
-    window.location.href = 'index.html?from=archive';
-}
-
-// Check if we're loading from archive on index page
-if (window.location.search.includes('from=archive')) {
-    const archiveDate = sessionStorage.getItem('archiveDate');
-    const archiveData = sessionStorage.getItem('archiveData');
-    
-    if (archiveData) {
-        try {
-            window.currentNewsData = JSON.parse(archiveData);
-            setTimeout(() => {
-                if (window.currentNewsData) {
-                    displayNews(window.currentNewsData);
-                    document.getElementById('loading').style.display = 'none';
-                }
-            }, 100);
-            
-            // Clear session storage
-            sessionStorage.removeItem('archiveDate');
-            sessionStorage.removeItem('archiveData');
-        } catch (err) {
-            console.error('Error loading archive data:', err);
-        }
-    }
-}
 
 // =============================================
 // Search Functionality
@@ -210,24 +200,51 @@ function initializeSearch() {
     const searchInput = document.getElementById('search-input');
     
     if (searchInput) {
+        let searchTimeout;
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
-            filterArchive(query);
+            
+            // Debounce search to avoid too many requests
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                filterArchive(query);
+            }, 300);
         });
     }
 }
 
-function filterArchive(query) {
+async function filterArchive(query) {
     if (!query) {
         filteredArchive = [...archiveData];
-    } else {
-        filteredArchive = archiveData.filter(item => {
-            // Search in date
-            if (item.displayDate.toLowerCase().includes(query)) {
-                return true;
+        displayArchive();
+        return;
+    }
+    
+    // Filter by date first (fast)
+    filteredArchive = archiveData.filter(item => {
+        return item.displayDate.toLowerCase().includes(query) ||
+               item.date.includes(query);
+    });
+    
+    // If we have results, load data for those items to search in content
+    if (filteredArchive.length > 0 && filteredArchive.length <= 10) {
+        // Load data for filtered items to search in content
+        const searchPromises = filteredArchive.map(async (item) => {
+            if (!item.data) {
+                try {
+                    const data = await window.appUtils.loadNewsData(item.date);
+                    item.data = data;
+                } catch (err) {
+                    // Ignore errors
+                }
             }
-            
-            // Search in story titles and summaries
+            return item;
+        });
+        
+        await Promise.all(searchPromises);
+        
+        // Now filter by content
+        filteredArchive = filteredArchive.filter(item => {
             if (item.data && item.data.stories) {
                 return item.data.stories.some(story => {
                     const titleHu = (story.title_hu || '').toLowerCase();
@@ -241,7 +258,6 @@ function filterArchive(query) {
                            summaryEn.includes(query);
                 });
             }
-            
             return false;
         });
     }
