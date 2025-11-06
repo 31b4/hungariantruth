@@ -4,7 +4,8 @@ Gemini AI integration for news synthesis
 import json
 import logging
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
+from pathlib import Path
 import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
@@ -25,31 +26,85 @@ class NewsSynthesizer:
         genai.configure(api_key=self.api_key)
         self.model = genai.GenerativeModel('gemini-2.5-flash')
     
-    def create_synthesis_prompt(self, categorized_articles):
+    def load_previous_stories(self, days_back=3, max_stories_per_day=3):
+        """
+        Load previous days' stories to avoid repetition
+        
+        Args:
+            days_back: Number of previous days to load
+            max_stories_per_day: Maximum stories to include per day
+            
+        Returns:
+            List of previous stories
+        """
+        previous_stories = []
+        
+        # Try multiple possible paths (local dev vs GitHub Actions)
+        possible_paths = [
+            Path('../data'),
+            Path('data'),
+            Path(__file__).parent.parent / 'data',
+        ]
+        
+        data_dir = None
+        for path in possible_paths:
+            if path.exists() and path.is_dir():
+                data_dir = path
+                break
+        
+        if not data_dir:
+            logger.warning("Could not find data directory, skipping previous stories")
+            return previous_stories
+        
+        for i in range(1, days_back + 1):
+            date = datetime.now() - timedelta(days=i)
+            date_str = date.strftime('%Y-%m-%d')
+            filepath = data_dir / f"{date_str}.json"
+            
+            if filepath.exists():
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        stories = data.get('stories', [])[:max_stories_per_day]
+                        for story in stories:
+                            story['previous_date'] = date_str
+                        previous_stories.extend(stories)
+                        logger.info(f"Loaded {len(stories)} stories from {date_str}")
+                except Exception as e:
+                    logger.warning(f"Could not load {date_str}.json: {e}")
+        
+        return previous_stories
+    
+    def create_synthesis_prompt(self, categorized_articles, previous_stories=None):
         """
         Create a detailed prompt for Gemini to synthesize news
         
         Args:
             categorized_articles: Dictionary with articles grouped by political leaning
+            previous_stories: List of stories from previous days
             
         Returns:
             Prompt string
         """
         prompt = """You are a professional journalist creating unbiased news synthesis for Hungarian readers.
 
-You will receive news articles from different political perspectives:
-- Right-wing/Government-aligned sources
-- Left-wing/Opposition sources  
-- Independent sources
+You will receive:
+1. News articles from today from different political perspectives
+2. Previous days' stories (to avoid repetition and identify ongoing stories)
 
 Your task:
-1. Identify the top 2-3 most important news stories of the day
-2. For each story, analyze how different sources cover it
-3. Create a neutral, fact-based synthesis that presents the truth without political bias
-4. Provide both Hungarian and English versions
-5. Cite which sources reported what
+1. Identify NEW important stories that haven't been covered in previous days
+2. Identify ONGOING stories from previous days that have new developments
+3. For ongoing stories, provide UPDATES (what's new today) rather than repeating old information
+4. For each story, analyze how different sources cover it
+5. Create a neutral, fact-based synthesis that presents the truth without political bias
+6. Provide both Hungarian and English versions
+7. Cite which sources reported what
 
-IMPORTANT: You MUST return ONLY valid, complete JSON. Do not truncate. Complete all fields.
+IMPORTANT: 
+- Do NOT repeat stories from previous days unless there are significant new developments
+- For ongoing stories, focus on what's NEW today
+- You MUST return ONLY valid, complete JSON. Do not truncate. Complete all fields.
 
 Guidelines:
 - Be strictly neutral and objective
@@ -66,20 +121,34 @@ Output format: JSON with this structure:
     {
       "title_hu": "Hungarian title",
       "title_en": "English title",
-      "summary_hu": "Detailed neutral summary in Hungarian (2-3 paragraphs)",
-      "summary_en": "Detailed neutral summary in English (2-3 paragraphs)",
+      "summary_hu": "Detailed neutral summary in Hungarian (2-3 paragraphs). For ongoing stories, focus on NEW developments.",
+      "summary_en": "Detailed neutral summary in English (2-3 paragraphs). For ongoing stories, focus on NEW developments.",
       "sources_analyzed": ["Source1", "Source2"],
       "perspective_comparison": "How different sources covered this (1 paragraph)",
-      "key_facts": ["Fact 1", "Fact 2", "Fact 3"]
+      "key_facts": ["Fact 1", "Fact 2", "Fact 3"],
+      "is_ongoing": true/false,
+      "previous_date": "YYYY-MM-DD" (only if this is an update to a previous story)
     }
   ],
   "methodology_note_hu": "Brief note on synthesis methodology in Hungarian",
   "methodology_note_en": "Brief note on synthesis methodology in English"
 }
 
-Here are today's articles:
-
 """
+        
+        # Add previous stories if available
+        if previous_stories:
+            prompt += "\n=== PREVIOUS DAYS' STORIES (for context - avoid repetition) ===\n"
+            for story in previous_stories:
+                prompt += f"\nDate: {story.get('previous_date', 'Unknown')}\n"
+                prompt += f"Title: {story.get('title_hu', story.get('title_en', 'N/A'))}\n"
+                # Include just key facts to save tokens
+                key_facts = story.get('key_facts', [])
+                if key_facts:
+                    prompt += f"Key Facts: {', '.join(key_facts[:3])}\n"
+                prompt += "\n"
+        
+        prompt += "\n=== TODAY'S ARTICLES ===\n"
         
         # Add right-wing articles
         prompt += "\n=== RIGHT-WING/GOVERNMENT SOURCES ===\n"
@@ -112,18 +181,32 @@ Here are today's articles:
         
         return prompt
     
-    def synthesize(self, categorized_articles, retry_count=3):
+    def synthesize(self, categorized_articles, retry_count=3, include_previous_days=True):
         """
         Use Gemini to synthesize news from multiple perspectives
         
         Args:
             categorized_articles: Dictionary with articles grouped by political leaning
             retry_count: Number of retries if API fails
+            include_previous_days: Whether to include previous days' stories for context
             
         Returns:
             Dictionary with synthesized news
         """
-        prompt = self.create_synthesis_prompt(categorized_articles)
+        # Load previous stories if requested
+        previous_stories = None
+        if include_previous_days:
+            try:
+                previous_stories = self.load_previous_stories(days_back=3, max_stories_per_day=3)
+                logger.info(f"Loaded {len(previous_stories)} previous stories for context")
+            except Exception as e:
+                logger.warning(f"Could not load previous stories: {e}")
+        
+        prompt = self.create_synthesis_prompt(categorized_articles, previous_stories)
+        
+        # Estimate token usage (rough: 1 token ≈ 4 characters)
+        estimated_tokens = len(prompt) / 4
+        logger.info(f"Estimated prompt tokens: ~{int(estimated_tokens):,} (Gemini 2.5 Flash limit: 1,000,000)")
         
         for attempt in range(retry_count):
             try:
