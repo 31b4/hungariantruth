@@ -35,16 +35,20 @@ async function loadArchive() {
             return;
         }
         
-        // Load all archive data
+        // Load archive data in parallel (all at once is fine for small datasets)
         const archivePromises = dataFiles.map(async (dateStr) => {
-            const data = await window.appUtils.loadNewsData(dateStr);
-            if (data) {
-                return {
-                    date: dateStr,
-                    displayDate: window.appUtils.formatDisplayDate(dateStr),
-                    storyCount: data.stories ? data.stories.length : 0,
-                    data: data
-                };
+            try {
+                const data = await window.appUtils.loadNewsData(dateStr);
+                if (data) {
+                    return {
+                        date: dateStr,
+                        displayDate: window.appUtils.formatDisplayDate(dateStr),
+                        storyCount: data.stories ? data.stories.length : 0,
+                        data: data
+                    };
+                }
+            } catch (err) {
+                console.warn(`Failed to load ${dateStr}:`, err);
             }
             return null;
         });
@@ -67,23 +71,51 @@ async function loadArchive() {
 // Discover Available Data Files
 // =============================================
 async function discoverDataFiles() {
+    // First, try to load index.json (fastest method)
+    try {
+        const response = await fetch('data/index.json', { cache: 'no-cache' });
+        if (response.ok) {
+            const index = await response.json();
+            if (index.available_dates && index.available_dates.length > 0) {
+                return index.available_dates;
+            }
+        }
+    } catch (err) {
+        console.log('Index file not found, falling back to discovery');
+    }
+    
+    // Fallback: Check files manually (slower but works if index doesn't exist)
     const files = [];
     const today = new Date();
+    const daysToCheck = 30; // Reduced from 60 for faster loading
     
-    // Try to find files for the last 90 days
-    for (let i = 0; i < 90; i++) {
+    // Create all date strings first
+    const datesToCheck = [];
+    for (let i = 0; i < daysToCheck; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
-        const dateStr = window.appUtils.formatDate(date);
+        datesToCheck.push(window.appUtils.formatDate(date));
+    }
+    
+    // Check files in parallel batches (10 at a time)
+    const batchSize = 10;
+    for (let i = 0; i < datesToCheck.length; i += batchSize) {
+        const batch = datesToCheck.slice(i, i + batchSize);
         
-        try {
-            const response = await fetch(`data/${dateStr}.json`, { method: 'HEAD' });
-            if (response.ok) {
-                files.push(dateStr);
+        const batchPromises = batch.map(async (dateStr) => {
+            try {
+                const response = await fetch(`data/${dateStr}.json`, { 
+                    method: 'HEAD',
+                    cache: 'no-cache'
+                });
+                return response.ok ? dateStr : null;
+            } catch (err) {
+                return null;
             }
-        } catch (err) {
-            // File doesn't exist, skip
-        }
+        });
+        
+        const batchResults = await Promise.all(batchPromises);
+        files.push(...batchResults.filter(f => f !== null));
     }
     
     return files;

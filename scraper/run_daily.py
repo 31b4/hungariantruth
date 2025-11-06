@@ -56,6 +56,15 @@ def main():
         logger.info("\n💾 Step 4: Saving synthesis...")
         output_path = synthesizer.save_synthesis(synthesis)
         
+        # Step 5: Update index.json for faster archive loading
+        logger.info("\n📇 Step 5: Updating archive index...")
+        try:
+            from update_index import update_index
+            update_index()
+            logger.info("  ✓ Archive index updated")
+        except Exception as e:
+            logger.warning(f"  ⚠️  Could not update index: {e}")
+        
         logger.info("\n" + "=" * 60)
         logger.info(f"✅ Daily synthesis completed successfully!")
         logger.info(f"📄 Output saved to: {output_path}")
