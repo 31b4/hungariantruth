@@ -20,8 +20,29 @@ async function loadArchive() {
     const archiveList = document.getElementById('archive-list');
     
     try {
-        // Get list of dates from index.json (fastest method)
-        const dataFiles = await discoverDataFiles();
+        // Load index.json once (contains dates AND story counts)
+        let indexData = null;
+        try {
+            const indexResponse = await fetch('data/index.json', { cache: 'no-cache' });
+            if (indexResponse.ok) {
+                indexData = await indexResponse.json();
+            }
+        } catch (err) {
+            console.log('Index file not found, falling back to discovery');
+        }
+        
+        // Get list of dates (from index or discovery)
+        let dataFiles = [];
+        let storyCounts = {};
+        
+        if (indexData && indexData.available_dates && indexData.available_dates.length > 0) {
+            // Use index.json (fastest - everything in one request!)
+            dataFiles = indexData.available_dates;
+            storyCounts = indexData.story_counts || {};
+        } else {
+            // Fallback: discover files manually
+            dataFiles = await discoverDataFiles();
+        }
         
         if (dataFiles.length === 0) {
             archiveList.innerHTML = `
@@ -35,11 +56,11 @@ async function loadArchive() {
             return;
         }
         
-        // Create archive items immediately (don't wait for story counts)
+        // Create archive items immediately with story counts from index
         archiveData = dataFiles.map(dateStr => ({
             date: dateStr,
             displayDate: window.appUtils.formatDisplayDate(dateStr),
-            storyCount: null, // Will load lazily
+            storyCount: storyCounts[dateStr] !== undefined ? storyCounts[dateStr] : null,
             data: null
         })).sort((a, b) => new Date(b.date) - new Date(a.date));
         
@@ -47,8 +68,11 @@ async function loadArchive() {
         displayArchive();
         loading.style.display = 'none';
         
-        // Load story counts in background (non-blocking)
-        loadStoryCountsInBackground();
+        // Only load missing story counts in background (if index didn't have them)
+        const missingCounts = archiveData.filter(item => item.storyCount === null);
+        if (missingCounts.length > 0) {
+            loadStoryCountsInBackground();
+        }
         
     } catch (err) {
         console.error('Error loading archive:', err);
@@ -95,22 +119,9 @@ function updateArchiveItemCount(item) {
 }
 
 // =============================================
-// Discover Available Data Files
+// Discover Available Data Files (Fallback only)
 // =============================================
 async function discoverDataFiles() {
-    // First, try to load index.json (fastest method)
-    try {
-        const response = await fetch('data/index.json', { cache: 'no-cache' });
-        if (response.ok) {
-            const index = await response.json();
-            if (index.available_dates && index.available_dates.length > 0) {
-                return index.available_dates;
-            }
-        }
-    } catch (err) {
-        console.log('Index file not found, falling back to discovery');
-    }
-    
     // Fallback: Check files manually (slower but works if index doesn't exist)
     const files = [];
     const today = new Date();

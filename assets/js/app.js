@@ -110,46 +110,35 @@ async function loadTodayNews() {
     const newsContainer = document.getElementById('news-container');
     
     try {
-        // Check URL parameters first (for archive links)
+        // Check URL parameters FIRST (for archive links) - this is the priority
         const urlParams = new URLSearchParams(window.location.search);
         const dateParam = urlParams.get('date');
-        
-        // Check sessionStorage for archive data
-        const archiveDate = sessionStorage.getItem('archiveDate');
-        const archiveData = sessionStorage.getItem('archiveData');
         
         let data = null;
         let dateStr = null;
         
-        // Priority 1: Archive data from sessionStorage
-        if (archiveDate && archiveData) {
-            try {
-                data = JSON.parse(archiveData);
-                dateStr = archiveDate;
-                // Clear after use
-                sessionStorage.removeItem('archiveDate');
-                sessionStorage.removeItem('archiveData');
-            } catch (e) {
-                console.warn('Failed to parse archive data from sessionStorage');
-            }
-        }
-        
-        // Priority 2: Date from URL parameter
-        if (!data && dateParam) {
+        // Priority 1: Date from URL parameter (archive clicks)
+        if (dateParam) {
             dateStr = dateParam;
             data = await loadNewsData(dateParam);
+            if (data) {
+                // Successfully loaded the requested date
+                window.currentNewsData = data;
+                displayNews(data);
+                loading.style.display = 'none';
+                return;
+            }
+            // If date param exists but file not found, show error
+            throw new Error(`News for ${dateParam} not found`);
         }
         
-        // Priority 3: Today's news
-        if (!data) {
-            const today = new Date();
-            dateStr = formatDate(today);
-            data = await loadNewsData(dateStr);
-        }
+        // Priority 2: Today's news
+        const today = new Date();
+        dateStr = formatDate(today);
+        data = await loadNewsData(dateStr);
         
-        // Priority 4: Yesterday's news (fallback)
+        // Priority 3: Yesterday's news (fallback)
         if (!data) {
-            const today = new Date();
             const yesterday = new Date(today);
             yesterday.setDate(yesterday.getDate() - 1);
             dateStr = formatDate(yesterday);
