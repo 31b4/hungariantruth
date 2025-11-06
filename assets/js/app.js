@@ -6,7 +6,7 @@
 let currentLanguage = localStorage.getItem('language') || 'hu';
 
 // Theme management
-let currentTheme = localStorage.getItem('theme') || 'light';
+let currentTheme = localStorage.getItem('theme') || 'dark';
 
 // =============================================
 // Initialize on page load
