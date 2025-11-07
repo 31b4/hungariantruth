@@ -4,11 +4,121 @@ Gemini AI integration for news synthesis
 import json
 import logging
 import os
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
 import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
+
+
+def repair_json(json_text):
+    """
+    Attempt to repair common JSON issues from AI responses:
+    - Unterminated strings
+    - Missing closing brackets/braces
+    - Unescaped newlines in strings
+    """
+    # Simple approach: find the last complete JSON structure
+    # Look for the last complete closing brace
+    last_brace = json_text.rfind('}')
+    if last_brace == -1:
+        # No closing brace at all, try to add one
+        # Find the last opening brace
+        last_open = json_text.rfind('{')
+        if last_open != -1:
+            # Add closing for any open structures
+            open_count = json_text.count('{') - json_text.count('}')
+            if open_count > 0:
+                json_text += '\n' + '}' * open_count
+        return json_text
+    
+    # Find the matching opening brace
+    brace_count = 0
+    start_pos = last_brace
+    for i in range(last_brace, -1, -1):
+        if json_text[i] == '}':
+            brace_count += 1
+        elif json_text[i] == '{':
+            brace_count -= 1
+            if brace_count == 0:
+                start_pos = i
+                break
+    
+    # Extract the complete JSON object
+    if start_pos < last_brace:
+        json_text = json_text[start_pos:last_brace + 1]
+    
+    # Try to close any unterminated strings at the end
+    # Simple heuristic: if the last non-whitespace character before } is not ", ], or }, 
+    # and we're inside quotes, close the quote
+    lines = json_text.split('\n')
+    if lines:
+        last_line = lines[-1].rstrip()
+        # Check if we're likely in an unterminated string
+        # Count quotes in the last line
+        quote_count = last_line.count('"') - last_line.count('\\"')
+        if quote_count % 2 == 1:  # Odd number of quotes means unterminated
+            # Try to find where to close it
+            # Look for the last field that might be incomplete
+            if not last_line.endswith(('"', '}', ']', ',')):
+                # Likely an unterminated string, try to close it
+                lines[-1] = last_line + '"'
+                json_text = '\n'.join(lines)
+    
+    # Try to close incomplete JSON structures
+    open_braces = json_text.count('{')
+    close_braces = json_text.count('}')
+    open_brackets = json_text.count('[')
+    close_brackets = json_text.count(']')
+    
+    # Add missing closing brackets/braces (but be careful not to over-close)
+    if open_braces > close_braces:
+        json_text += '\n' + '}' * (open_braces - close_braces)
+    if open_brackets > close_brackets:
+        json_text += '\n' + ']' * (open_brackets - close_brackets)
+    
+    return json_text
+
+
+def extract_and_repair_json(response_text):
+    """
+    Extract JSON from response and attempt to repair it
+    """
+    # Extract JSON from markdown code blocks if present
+    if '```json' in response_text:
+        start = response_text.find('```json') + 7
+        end = response_text.find('```', start)
+        if end == -1:
+            # Unterminated code block, try to find end of JSON
+            json_text = response_text[start:].strip()
+        else:
+            json_text = response_text[start:end].strip()
+    elif '```' in response_text:
+        start = response_text.find('```') + 3
+        end = response_text.find('```', start)
+        if end == -1:
+            json_text = response_text[start:].strip()
+        else:
+            json_text = response_text[start:end].strip()
+    else:
+        json_text = response_text.strip()
+    
+    # Try to find JSON object boundaries
+    first_brace = json_text.find('{')
+    if first_brace != -1:
+        # Find the last complete closing brace
+        last_brace = json_text.rfind('}')
+        if last_brace != -1 and last_brace > first_brace:
+            json_text = json_text[first_brace:last_brace + 1]
+        else:
+            # No closing brace, try to repair
+            json_text = json_text[first_brace:]
+    
+    # Attempt repair
+    repaired = repair_json(json_text)
+    
+    return repaired
 
 
 class NewsSynthesizer:
@@ -101,10 +211,13 @@ Your task:
 6. Provide both Hungarian and English versions
 7. Cite which sources reported what
 
-IMPORTANT: 
-- Do NOT repeat stories from previous days unless there are significant new developments
-- For ongoing stories, focus on what's NEW today
-- You MUST return ONLY valid, complete JSON. Do not truncate. Complete all fields.
+CRITICAL JSON REQUIREMENTS:
+- You MUST return ONLY valid, complete JSON
+- Do NOT truncate any strings - complete all summaries fully
+- Escape all quotes and special characters properly (use \\" for quotes inside strings)
+- Close all strings, arrays, and objects properly
+- If you run out of space, shorten summaries rather than truncating mid-string
+- Test that your JSON is valid before returning it
 
 Guidelines:
 - Be strictly neutral and objective
@@ -121,8 +234,8 @@ Output format: JSON with this structure:
     {
       "title_hu": "Hungarian title",
       "title_en": "English title",
-      "summary_hu": "Detailed neutral summary in Hungarian (2-3 paragraphs). For ongoing stories, focus on NEW developments.",
-      "summary_en": "Detailed neutral summary in English (2-3 paragraphs). For ongoing stories, focus on NEW developments.",
+      "summary_hu": "Concise neutral summary in Hungarian (1-2 paragraphs, max 500 words). For ongoing stories, focus on NEW developments.",
+      "summary_en": "Concise neutral summary in English (1-2 paragraphs, max 500 words). For ongoing stories, focus on NEW developments.",
       "sources_analyzed": ["Source1", "Source2"],
       "perspective_comparison": "How different sources covered this (1 paragraph)",
       "key_facts": ["Fact 1", "Fact 2", "Fact 3"],
@@ -229,19 +342,76 @@ Output format: JSON with this structure:
                     # Handle complex responses
                     response_text = response.candidates[0].content.parts[0].text
                 
-                # Try to parse JSON (handle markdown code blocks)
-                if '```json' in response_text:
-                    start = response_text.find('```json') + 7
-                    end = response_text.find('```', start)
-                    json_text = response_text[start:end].strip()
-                elif '```' in response_text:
-                    start = response_text.find('```') + 3
-                    end = response_text.find('```', start)
-                    json_text = response_text[start:end].strip()
-                else:
-                    json_text = response_text.strip()
+                # Extract and repair JSON
+                json_text = extract_and_repair_json(response_text)
                 
-                synthesis = json.loads(json_text)
+                # Try to parse the repaired JSON
+                try:
+                    synthesis = json.loads(json_text)
+                except json.JSONDecodeError as parse_error:
+                    # If repair didn't work, try a more aggressive approach
+                    logger.warning(f"Initial JSON parse failed: {parse_error}. Attempting aggressive repair...")
+                    
+                    # Try to find the stories array start
+                    stories_start = json_text.find('"stories"')
+                    if stories_start != -1:
+                        # Find the opening bracket after "stories"
+                        bracket_start = json_text.find('[', stories_start)
+                        if bracket_start != -1:
+                            # Try to find complete story objects
+                            # Look for patterns like {"title_hu": ...}
+                            story_pattern = r'\{\s*"title_hu"\s*:'
+                            story_matches = list(re.finditer(story_pattern, json_text[bracket_start:], re.MULTILINE))
+                            
+                            if story_matches:
+                                # Try to extract each story object
+                                stories = []
+                                for i, match in enumerate(story_matches):
+                                    start_pos = bracket_start + match.start()
+                                    # Find the end of this story object
+                                    if i + 1 < len(story_matches):
+                                        end_pos = bracket_start + story_matches[i + 1].start()
+                                    else:
+                                        # Last story, find the closing brace
+                                        end_pos = json_text.find('}', start_pos)
+                                        if end_pos == -1:
+                                            end_pos = len(json_text)
+                                        else:
+                                            end_pos += 1
+                                    
+                                    story_text = json_text[start_pos:end_pos].rstrip().rstrip(',')
+                                    # Try to close it if incomplete
+                                    if not story_text.rstrip().endswith('}'):
+                                        story_text = story_text.rstrip().rstrip(',') + '\n}'
+                                    
+                                    try:
+                                        story = json.loads(story_text)
+                                        stories.append(story)
+                                    except:
+                                        # Skip this story if it's too broken
+                                        logger.warning(f"Could not parse story {i+1}, skipping...")
+                                        continue
+                                
+                                if stories:
+                                    # Build a minimal valid JSON
+                                    date_match = re.search(r'"date"\s*:\s*"([^"]+)"', json_text)
+                                    date_str = date_match.group(1) if date_match else datetime.now().strftime('%Y-%m-%d')
+                                    
+                                    synthesis = {
+                                        'date': date_str,
+                                        'stories': stories,
+                                        'methodology_note_hu': 'Automatikusan generálva (javított JSON)',
+                                        'methodology_note_en': 'Automatically generated (repaired JSON)'
+                                    }
+                                    logger.info(f"Successfully extracted {len(stories)} stories using aggressive repair")
+                                else:
+                                    raise parse_error
+                            else:
+                                raise parse_error
+                        else:
+                            raise parse_error
+                    else:
+                        raise parse_error
                 
                 # Add metadata
                 synthesis['metadata'] = {
