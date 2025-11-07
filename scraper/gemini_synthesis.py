@@ -19,7 +19,44 @@ def repair_json(json_text):
     - Missing closing brackets/braces
     - Unescaped newlines in strings
     """
-    # Simple approach: find the last complete JSON structure
+    # First, try to find and close unterminated strings
+    # We'll scan through the text and track string state
+    result = []
+    in_string = False
+    escape_next = False
+    i = 0
+    
+    while i < len(json_text):
+        char = json_text[i]
+        
+        if escape_next:
+            result.append(char)
+            escape_next = False
+            i += 1
+            continue
+        
+        if char == '\\':
+            result.append(char)
+            escape_next = True
+            i += 1
+            continue
+        
+        if char == '"':
+            result.append(char)
+            in_string = not in_string
+            i += 1
+            continue
+        
+        result.append(char)
+        i += 1
+    
+    # If we ended inside a string, close it
+    if in_string:
+        result.append('"')
+    
+    json_text = ''.join(result)
+    
+    # Now try to find the last complete JSON structure
     # Look for the last complete closing brace
     last_brace = json_text.rfind('}')
     if last_brace == -1:
@@ -33,7 +70,7 @@ def repair_json(json_text):
                 json_text += '\n' + '}' * open_count
         return json_text
     
-    # Find the matching opening brace
+    # Find the matching opening brace by counting backwards
     brace_count = 0
     start_pos = last_brace
     for i in range(last_brace, -1, -1):
@@ -48,23 +85,6 @@ def repair_json(json_text):
     # Extract the complete JSON object
     if start_pos < last_brace:
         json_text = json_text[start_pos:last_brace + 1]
-    
-    # Try to close any unterminated strings at the end
-    # Simple heuristic: if the last non-whitespace character before } is not ", ], or }, 
-    # and we're inside quotes, close the quote
-    lines = json_text.split('\n')
-    if lines:
-        last_line = lines[-1].rstrip()
-        # Check if we're likely in an unterminated string
-        # Count quotes in the last line
-        quote_count = last_line.count('"') - last_line.count('\\"')
-        if quote_count % 2 == 1:  # Odd number of quotes means unterminated
-            # Try to find where to close it
-            # Look for the last field that might be incomplete
-            if not last_line.endswith(('"', '}', ']', ',')):
-                # Likely an unterminated string, try to close it
-                lines[-1] = last_line + '"'
-                json_text = '\n'.join(lines)
     
     # Try to close incomplete JSON structures
     open_braces = json_text.count('{')
@@ -185,13 +205,14 @@ class NewsSynthesizer:
         
         return previous_stories
     
-    def create_synthesis_prompt(self, categorized_articles, previous_stories=None):
+    def create_synthesis_prompt(self, categorized_articles, previous_stories=None, max_stories=2):
         """
         Create a detailed prompt for Gemini to synthesize news
         
         Args:
             categorized_articles: Dictionary with articles grouped by political leaning
             previous_stories: List of stories from previous days
+            max_stories: Maximum number of stories to generate (default 2)
             
         Returns:
             Prompt string
@@ -203,8 +224,8 @@ You will receive:
 2. Previous days' stories (to avoid repetition and identify ongoing stories)
 
 Your task:
-1. Identify NEW important stories that haven't been covered in previous days
-2. Identify ONGOING stories from previous days that have new developments
+1. Identify the MOST IMPORTANT new stories that haven't been covered in previous days
+2. Identify ONGOING stories from previous days that have significant new developments
 3. For ongoing stories, provide UPDATES (what's new today) rather than repeating old information
 4. For each story, analyze how different sources cover it
 5. Create a neutral, fact-based synthesis that presents the truth without political bias
@@ -213,7 +234,9 @@ Your task:
 
 CRITICAL JSON REQUIREMENTS:
 - You MUST return ONLY valid, complete JSON
+- Return MAXIMUM {max_stories} stories total (prioritize the most important ones)
 - Do NOT truncate any strings - complete all summaries fully
+- Keep summaries SHORT (max 250 words per summary) to ensure you don't run out of tokens
 - Escape all quotes and special characters properly (use \\" for quotes inside strings)
 - Close all strings, arrays, and objects properly
 - If you run out of space, shorten summaries rather than truncating mid-string
@@ -234,8 +257,8 @@ Output format: JSON with this structure:
     {
       "title_hu": "Hungarian title",
       "title_en": "English title",
-      "summary_hu": "Concise neutral summary in Hungarian (1-2 paragraphs, max 500 words). For ongoing stories, focus on NEW developments.",
-      "summary_en": "Concise neutral summary in English (1-2 paragraphs, max 500 words). For ongoing stories, focus on NEW developments.",
+      "summary_hu": "Concise neutral summary in Hungarian (1 paragraph, max 250 words). For ongoing stories, focus on NEW developments.",
+      "summary_en": "Concise neutral summary in English (1 paragraph, max 250 words). For ongoing stories, focus on NEW developments.",
       "sources_analyzed": ["Source1", "Source2"],
       "perspective_comparison": "How different sources covered this (1 paragraph)",
       "key_facts": ["Fact 1", "Fact 2", "Fact 3"],
@@ -292,6 +315,9 @@ Output format: JSON with this structure:
         
         prompt += "\n\nNow create the neutral synthesis in JSON format:"
         
+        # Format the prompt with max_stories
+        prompt = prompt.format(max_stories=max_stories)
+        
         return prompt
     
     def synthesize(self, categorized_articles, retry_count=3, include_previous_days=True):
@@ -315,15 +341,23 @@ Output format: JSON with this structure:
             except Exception as e:
                 logger.warning(f"Could not load previous stories: {e}")
         
-        prompt = self.create_synthesis_prompt(categorized_articles, previous_stories)
+        # Start with 2 stories, reduce to 1 if we have truncation issues
+        max_stories = 2
         
         # Estimate token usage (rough: 1 token ≈ 4 characters)
+        prompt = self.create_synthesis_prompt(categorized_articles, previous_stories, max_stories)
         estimated_tokens = len(prompt) / 4
         logger.info(f"Estimated prompt tokens: ~{int(estimated_tokens):,} (Gemini 2.5 Flash limit: 1,000,000)")
         
         for attempt in range(retry_count):
             try:
-                logger.info(f"Sending synthesis request to Gemini (attempt {attempt + 1}/{retry_count})")
+                # Reduce stories on retry if we had truncation issues
+                if attempt > 0 and max_stories > 1:
+                    max_stories = 1
+                    logger.info(f"Reducing to 1 story on retry {attempt + 1} to avoid truncation")
+                    prompt = self.create_synthesis_prompt(categorized_articles, previous_stories, max_stories)
+                
+                logger.info(f"Sending synthesis request to Gemini (attempt {attempt + 1}/{retry_count}, max_stories={max_stories})")
                 
                 response = self.model.generate_content(
                     prompt,
@@ -336,11 +370,27 @@ Output format: JSON with this structure:
                 )
                 
                 # Extract JSON from response
+                response_text = None
                 try:
                     response_text = response.text
                 except ValueError:
-                    # Handle complex responses
-                    response_text = response.candidates[0].content.parts[0].text
+                    # Handle complex responses - try to get text from parts
+                    try:
+                        if response.candidates and len(response.candidates) > 0:
+                            candidate = response.candidates[0]
+                            if candidate.content and candidate.content.parts and len(candidate.content.parts) > 0:
+                                # Concatenate all text parts
+                                text_parts = []
+                                for part in candidate.content.parts:
+                                    if hasattr(part, 'text') and part.text:
+                                        text_parts.append(part.text)
+                                if text_parts:
+                                    response_text = ''.join(text_parts)
+                    except Exception as e:
+                        logger.error(f"Error extracting text from response parts: {e}")
+                
+                if not response_text:
+                    raise ValueError("Could not extract text from Gemini response")
                 
                 # Extract and repair JSON
                 json_text = extract_and_repair_json(response_text)
